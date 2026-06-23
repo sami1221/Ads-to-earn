@@ -164,27 +164,22 @@
   }
   .balance-label { color: var(--muted); font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
   .eye-btn {
-    background: none; border: none; cursor: pointer;
-    color: var(--muted); font-size: 20px; padding: 6px;
-    line-height: 1; display: flex; align-items: center; justify-content: center;
-    min-width: 36px; min-height: 36px;
-    border-radius: 8px;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+    background: none; border: none; cursor: pointer; color: var(--muted);
+    font-size: 18px; padding: 4px;
+    /* Fix: make sure it's above the ::before pseudo-element */
+    position: relative; z-index: 2;
   }
-  .eye-btn:active { background: rgba(255,255,255,0.05); }
-
   .balance-value {
     font-family: 'Orbitron', monospace; font-size: 32px; font-weight: 900;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1;
   }
-  /* Hidden balance style */
-  .balance-value.hidden-val {
-    -webkit-text-fill-color: var(--muted);
+  /* Hidden state: override gradient with plain muted color */
+  .balance-value.hidden {
     background: none;
-    letter-spacing: 4px;
-    font-size: 28px;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: var(--muted);
+    color: var(--muted);
   }
   .balance-usd { color: var(--muted); font-size: 12px; margin-top: 4px; }
 
@@ -227,11 +222,6 @@
     background: var(--card); color: var(--muted);
     border: 1px solid var(--border); box-shadow: none; cursor: not-allowed;
   }
-  .btn-watch.watching {
-    background: linear-gradient(135deg, #1a2235, #0d1f35);
-    color: var(--accent); border: 1px solid var(--accent);
-    box-shadow: 0 0 20px rgba(0,245,160,0.2); cursor: not-allowed;
-  }
   .btn-watch-shine {
     position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
@@ -239,10 +229,10 @@
   }
   @keyframes shine { 0%,100%{left:-100%;} 50%{left:150%;} }
 
-  /* Timer overlay */
-  .ad-timer-overlay {
+  /* AD TIMER OVERLAY */
+  .ad-overlay {
     display: none;
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    position: fixed; inset: 0;
     background: rgba(0,0,0,0.85);
     z-index: 200;
     flex-direction: column;
@@ -250,36 +240,38 @@
     justify-content: center;
     gap: 20px;
   }
-  .ad-timer-overlay.show { display: flex; }
-  .ad-timer-circle {
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    border: 4px solid var(--border);
-    border-top-color: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .ad-timer-inner {
-    position: absolute;
-    width: 108px; height: 108px;
-    border-radius: 50%;
+  .ad-overlay.show { display: flex; }
+  .ad-overlay-box {
     background: var(--card);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    animation: unspin 1s linear infinite;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px 28px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
   }
-  @keyframes unspin { to { transform: rotate(-360deg); } }
+  .ad-overlay-icon { font-size: 48px; margin-bottom: 10px; }
+  .ad-overlay-title { font-family: 'Orbitron', monospace; font-size: 16px; color: var(--accent); margin-bottom: 6px; }
+  .ad-overlay-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  .ad-timer-ring {
+    width: 80px; height: 80px; margin: 0 auto 16px;
+    position: relative;
+  }
+  .ad-timer-ring svg { transform: rotate(-90deg); }
+  .ad-timer-ring circle {
+    fill: none;
+    stroke-width: 6;
+    stroke-linecap: round;
+  }
+  .ad-timer-bg { stroke: var(--surface); }
+  .ad-timer-fg { stroke: var(--accent); stroke-dasharray: 220; stroke-dashoffset: 220; transition: stroke-dashoffset 1s linear; }
   .ad-timer-num {
-    font-family: 'Orbitron', monospace;
-    font-size: 36px; font-weight: 900;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-family: 'Orbitron', monospace; font-size: 22px; font-weight: 900;
     color: var(--accent);
-    line-height: 1;
   }
-  .ad-timer-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .ad-timer-msg { color: var(--text); font-size: 15px; font-weight: 500; text-align: center; padding: 0 30px; }
-  .ad-timer-sub { color: var(--muted); font-size: 12px; text-align: center; }
+  .ad-status-text { font-size: 13px; color: var(--muted); }
+  .ad-status-text.done { color: var(--accent); font-weight: 600; }
 
   /* AD CONTAINER */
   #adContainer {
@@ -335,7 +327,7 @@
   .task-btn.join { background: linear-gradient(135deg, #37aee2, #1e96c8); color: #fff; }
   .task-btn.subscribe { background: linear-gradient(135deg, #c4302b, #ff0000); color: #fff; }
   .task-btn.done-btn { background: rgba(0,245,160,0.1); color: var(--accent); border: 1px solid rgba(0,245,160,0.3); cursor: default; }
-  .task-btn.verify-btn { background: rgba(255,215,0,0.15); color: var(--gold); border: 1px solid rgba(255,215,0,0.4); }
+  .task-btn.verify-btn { background: rgba(255,215,0,0.15); color: var(--gold); border: 1px solid rgba(255,215,0,0.4); font-size: 11px; }
   .task-btn.retry-btn { background: rgba(255,75,110,0.15); color: var(--danger); border: 1px solid rgba(255,75,110,0.4); }
   .task-btn:active { transform: scale(0.95); }
 
@@ -432,15 +424,20 @@
 <div class="toast" id="toast"></div>
 
 <!-- AD TIMER OVERLAY -->
-<div class="ad-timer-overlay" id="adTimerOverlay">
-  <div class="ad-timer-circle">
-    <div class="ad-timer-inner">
-      <div class="ad-timer-num" id="adTimerNum">15</div>
-      <div class="ad-timer-lbl">sec</div>
+<div class="ad-overlay" id="adOverlay">
+  <div class="ad-overlay-box">
+    <div class="ad-overlay-icon">📺</div>
+    <div class="ad-overlay-title">Watching Ad...</div>
+    <div class="ad-overlay-sub">Stay on this screen for 15 seconds to earn</div>
+    <div class="ad-timer-ring">
+      <svg width="80" height="80" viewBox="0 0 80 80">
+        <circle class="ad-timer-bg" cx="40" cy="40" r="35"/>
+        <circle class="ad-timer-fg" id="timerCircle" cx="40" cy="40" r="35"/>
+      </svg>
+      <div class="ad-timer-num" id="timerNum">15</div>
     </div>
+    <div class="ad-status-text" id="adStatusText">⏳ Please wait...</div>
   </div>
-  <div class="ad-timer-msg">📺 Ad is playing...</div>
-  <div class="ad-timer-sub">Wait 15 seconds to earn $0.001</div>
 </div>
 
 <!-- REGISTER SCREEN -->
@@ -480,7 +477,7 @@
     <div class="balance-card">
       <div class="balance-label-row">
         <span class="balance-label">💵 Total Earned</span>
-        <button class="eye-btn" id="eyeBtn" type="button">👁️</button>
+        <button class="eye-btn" id="eyeBtn">👁️</button>
       </div>
       <div class="balance-value" id="balanceDisplay">$0.000</div>
       <div class="balance-usd" id="adsWatchedInfo">0 ads watched • $0.001 per ad</div>
@@ -521,6 +518,7 @@
       </button>
     </div>
 
+    <!-- Monetag Ad Container -->
     <div id="adContainer" style="min-height:60px;">
       <script async src="//libtl.com/sdk.js" data-zone="11186811" data-sdk="show_11186811"></script>
     </div>
@@ -648,9 +646,6 @@ const TASK_LINKS = {
   youtube: 'https://www.youtube.com/@Adstoearn'
 };
 
-const AD_DURATION = 15; // seconds required to watch
-const TASK_MIN_TIME = 10; // seconds minimum for task
-
 // STATE
 let state = {
   registered: false,
@@ -663,14 +658,6 @@ let state = {
   bonusClaimed: false,
   tasks: { tiktok: false, telegram: false, youtube: false }
 };
-
-// Task pending state (not saved - resets on reload)
-let taskPending = { tiktok: false, telegram: false, youtube: false };
-let taskStartTime = { tiktok: 0, telegram: 0, youtube: 0 };
-
-// Ad watching state
-let adWatching = false;
-let adTimerInterval = null;
 
 function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){} }
 function load() {
@@ -733,6 +720,7 @@ function showApp() {
   initAd();
 }
 
+// Initialize Monetag ad
 function initAd() {
   if(typeof show_11186811 === 'function') return;
   const script = document.querySelector('script[data-zone="11186811"]');
@@ -760,21 +748,21 @@ function renderProfile() {
   }
 }
 
-// ============================================================
+// =============================================
 // FIX 1: BALANCE HIDE / SHOW
-// ============================================================
+// The issue was -webkit-text-fill-color overrides color.
+// We toggle a CSS class "hidden" that overrides both.
+// =============================================
 function renderBalance() {
   const bal = state.balance.toFixed(3);
-  const balDisplay = document.getElementById('balanceDisplay');
+  const balEl = document.getElementById('balanceDisplay');
 
   if(state.balanceHidden) {
-    balDisplay.textContent = '● ● ● ●';
-    balDisplay.classList.add('hidden-val');
-    document.getElementById('eyeBtn').textContent = '🙈';
+    balEl.textContent = '••••••';
+    balEl.classList.add('hidden');
   } else {
-    balDisplay.textContent = '$' + bal;
-    balDisplay.classList.remove('hidden-val');
-    document.getElementById('eyeBtn').textContent = '👁️';
+    balEl.textContent = '$' + bal;
+    balEl.classList.remove('hidden');
   }
 
   document.getElementById('walletBalanceVal').textContent = '$' + bal;
@@ -782,73 +770,84 @@ function renderBalance() {
   document.getElementById('adsToday').textContent = state.adsToday;
   document.getElementById('totalAds').textContent = state.totalAds;
   document.getElementById('bonusProgress').textContent = Math.min(state.adsToday, 60);
+  document.getElementById('eyeBtn').textContent = state.balanceHidden ? '🙈' : '👁️';
 
   const btn = document.getElementById('watchBtn');
   const btnTxt = document.getElementById('watchBtnText');
   if(state.adsToday >= 60) {
     btn.classList.add('disabled');
-    btn.classList.remove('watching');
     btnTxt.textContent = '✅ Daily limit reached!';
-  } else if(adWatching) {
-    btn.classList.add('watching');
-    btn.classList.remove('disabled');
-    btnTxt.textContent = '⏳ Watching...';
   } else {
-    btn.classList.remove('disabled', 'watching');
+    btn.classList.remove('disabled');
     btnTxt.textContent = 'Watch Ad & Earn $0.001';
   }
 }
 
-// Eye button — use both click and touchend for reliability
-const eyeBtn = document.getElementById('eyeBtn');
-function toggleBalance(e) {
-  e.preventDefault();
+document.getElementById('eyeBtn').addEventListener('click', function(e) {
   e.stopPropagation();
   state.balanceHidden = !state.balanceHidden;
   save();
   renderBalance();
-}
-eyeBtn.addEventListener('click', toggleBalance);
-eyeBtn.addEventListener('touchend', toggleBalance);
-
-// ============================================================
-// FIX 2: WATCH AD — 15 SECOND TIMER
-// ============================================================
-document.getElementById('watchBtn').addEventListener('click', function() {
-  if(state.adsToday >= 60) { showToast('✅ Daily limit reached! Come back tomorrow'); return; }
-  if(adWatching) { showToast('⏳ Please wait for the ad to finish'); return; }
-
-  // Start the ad
-  try {
-    if(typeof show_11186811 === 'function') {
-      show_11186811();
-    }
-  } catch(e){ console.log('Ad SDK:', e); }
-
-  // Show timer overlay
-  adWatching = true;
-  renderBalance();
-  startAdTimer();
 });
 
+// =============================================
+// FIX 2: AD TIMER - must watch 15 seconds
+// Shows overlay with countdown. If user leaves
+// the page (visibilitychange) timer pauses/resets.
+// Only credits after full 15 seconds on screen.
+// =============================================
+let adTimerInterval = null;
+let adSecondsLeft = 15;
+let adAborted = false;
+const AD_DURATION = 15;
+const CIRCUMFERENCE = 2 * Math.PI * 35; // r=35
+
 function startAdTimer() {
-  const overlay = document.getElementById('adTimerOverlay');
-  const timerNum = document.getElementById('adTimerNum');
+  adSecondsLeft = AD_DURATION;
+  adAborted = false;
+
+  const overlay = document.getElementById('adOverlay');
+  const timerNum = document.getElementById('timerNum');
+  const timerCircle = document.getElementById('timerCircle');
+  const statusText = document.getElementById('adStatusText');
+
+  timerCircle.style.strokeDasharray = CIRCUMFERENCE;
+  timerCircle.style.strokeDashoffset = CIRCUMFERENCE;
+  timerNum.textContent = adSecondsLeft;
+  statusText.textContent = '⏳ Please wait...';
+  statusText.classList.remove('done');
   overlay.classList.add('show');
 
-  let remaining = AD_DURATION;
-  timerNum.textContent = remaining;
+  // Listen for page hide (user leaves)
+  function onVisibilityChange() {
+    if(document.hidden) {
+      // User left before 15s — abort
+      clearInterval(adTimerInterval);
+      adAborted = true;
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      overlay.classList.remove('show');
+      showToast('❌ You left too early! Ad cancelled.');
+    }
+  }
+  document.addEventListener('visibilitychange', onVisibilityChange);
 
   adTimerInterval = setInterval(function() {
-    remaining--;
-    timerNum.textContent = remaining;
-    if(remaining <= 0) {
-      clearInterval(adTimerInterval);
-      adTimerInterval = null;
-      overlay.classList.remove('show');
-      adWatching = false;
+    adSecondsLeft--;
+    timerNum.textContent = adSecondsLeft;
 
-      // Credit the user AFTER full 15 seconds
+    // Update ring progress
+    const progress = (AD_DURATION - adSecondsLeft) / AD_DURATION;
+    timerCircle.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
+
+    if(adSecondsLeft <= 0) {
+      clearInterval(adTimerInterval);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+
+      // Ad complete — credit the user
+      statusText.textContent = '✅ Reward earned!';
+      statusText.classList.add('done');
+      timerNum.textContent = '✓';
+
       state.adsToday++;
       state.totalAds++;
       state.balance += 0.001;
@@ -856,96 +855,138 @@ function startAdTimer() {
       if(state.adsToday === 60 && !state.bonusClaimed) {
         state.balance += 0.01;
         state.bonusClaimed = true;
-        setTimeout(() => showToast('🎉 60 Ads Bonus! +$0.01 added!'), 400);
+        setTimeout(() => showToast('🎉 60 Ads Bonus! +$0.01 added!'), 600);
       }
       save();
       renderBalance();
-      showToast('✅ +$0.001 earned!');
+
+      setTimeout(function() {
+        overlay.classList.remove('show');
+        showToast('✅ +$0.001 earned!');
+      }, 800);
     }
   }, 1000);
 }
 
-// ============================================================
-// FIX 3: TASKS — 10 SECOND MINIMUM, RETRY IF TOO FAST
-// ============================================================
+document.getElementById('watchBtn').addEventListener('click', function() {
+  if(state.adsToday >= 60) { showToast('✅ Daily limit reached! Come back tomorrow'); return; }
+  if(adTimerInterval) return; // already running
+
+  // Trigger Monetag ad
+  try {
+    if(typeof show_11186811 === 'function') show_11186811();
+  } catch(e){ console.log('Ad SDK:', e); }
+
+  startAdTimer();
+});
+
+// =============================================
+// FIX 3: TASKS - user must stay 10+ seconds
+// If they return before 10s → retry required.
+// Track per-task pending state in memory (not saved).
+// =============================================
+const taskPending = { tiktok: false, telegram: false, youtube: false };
+const taskTimers  = { tiktok: null,  telegram: null,  youtube: null  };
+const taskSeconds = { tiktok: 0,     telegram: 0,     youtube: 0     };
+const TASK_MIN_SECONDS = 10;
+
 function doTask(type) {
   if(state.tasks[type]) return;
   if(taskPending[type]) {
-    // Already opened link — check if enough time passed
-    const elapsed = (Date.now() - taskStartTime[type]) / 1000;
-    if(elapsed >= TASK_MIN_TIME) {
-      // Completed successfully
-      state.tasks[type] = true;
-      state.balance += 0.10;
-      taskPending[type] = false;
-      save();
-      renderBalance();
-      renderTasks();
-      showToast('🎉 +$0.10 Bonus earned!');
+    // Already opened — check if enough time passed
+    if(taskSeconds[type] >= TASK_MIN_SECONDS) {
+      completeTask(type);
     } else {
-      // Too fast — reset and require them to try again
-      taskPending[type] = false;
-      taskStartTime[type] = 0;
-      renderTasks();
-      showToast('❗ You left too fast! Please try again and stay longer.');
+      showToast('⏳ Please stay on the page longer!');
     }
     return;
   }
 
-  // First click — open link and record time
+  // First tap — open link and start timer
   window.open(TASK_LINKS[type], '_blank');
   taskPending[type] = true;
-  taskStartTime[type] = Date.now();
-  renderTasks(); // show "Verify" button
+  taskSeconds[type] = 0;
+  renderTasks();
+
+  taskTimers[type] = setInterval(function() {
+    taskSeconds[type]++;
+    // Update verify button label with countdown
+    const btn = document.getElementById(type + 'Btn');
+    if(btn && taskSeconds[type] < TASK_MIN_SECONDS) {
+      const left = TASK_MIN_SECONDS - taskSeconds[type];
+      btn.textContent = 'Verify (' + left + 's)';
+    } else if(btn && taskSeconds[type] >= TASK_MIN_SECONDS) {
+      clearInterval(taskTimers[type]);
+      btn.textContent = 'Claim ✅';
+      btn.className = 'task-btn verify-btn';
+    }
+  }, 1000);
+}
+
+function completeTask(type) {
+  if(taskTimers[type]) clearInterval(taskTimers[type]);
+  taskPending[type] = false;
+  state.tasks[type] = true;
+  state.balance += 0.10;
+  save();
+  renderBalance();
+  renderTasks();
+  showToast('🎉 +$0.10 Bonus earned!');
 }
 
 function renderTasks() {
   const configs = [
-    { key:'tiktok',   cardId:'tiktokTask',   btnId:'tiktokBtn',   btnClass:'follow',    doneLabel:'Followed ✅',    normalLabel:'Follow',    verifyLabel:'✔ Verify',  retryLabel:'Retry' },
-    { key:'telegram', cardId:'telegramTask', btnId:'telegramBtn', btnClass:'join',      doneLabel:'Joined ✅',      normalLabel:'Join',      verifyLabel:'✔ Verify',  retryLabel:'Retry' },
-    { key:'youtube',  cardId:'youtubeTask',  btnId:'youtubeBtn',  btnClass:'subscribe', doneLabel:'Subscribed ✅',  normalLabel:'Subscribe', verifyLabel:'✔ Verify',  retryLabel:'Retry' }
+    { key:'tiktok',   cardId:'tiktokTask',   btnId:'tiktokBtn',   btnClass:'follow',    doneLabel:'Followed ✅',    normalLabel:'Follow'    },
+    { key:'telegram', cardId:'telegramTask', btnId:'telegramBtn', btnClass:'join',      doneLabel:'Joined ✅',      normalLabel:'Join'      },
+    { key:'youtube',  cardId:'youtubeTask',  btnId:'youtubeBtn',  btnClass:'subscribe', doneLabel:'Subscribed ✅',  normalLabel:'Subscribe' }
   ];
-  configs.forEach(c => {
+  configs.forEach(function(c) {
     const card = document.getElementById(c.cardId);
-    const btn = document.getElementById(c.btnId);
+    const btn  = document.getElementById(c.btnId);
 
     if(state.tasks[c.key]) {
-      // Done
+      // Permanently done
       card.classList.add('done');
       card.classList.remove('verifying');
       btn.className = 'task-btn done-btn';
       btn.textContent = c.doneLabel;
       btn.onclick = null;
     } else if(taskPending[c.key]) {
-      // Waiting to verify
+      // Waiting / verifying
       card.classList.add('verifying');
       card.classList.remove('done');
-      btn.className = 'task-btn verify-btn';
-      btn.textContent = c.verifyLabel;
-      btn.onclick = () => doTask(c.key);
+      const left = Math.max(0, TASK_MIN_SECONDS - taskSeconds[c.key]);
+      if(taskSeconds[c.key] >= TASK_MIN_SECONDS) {
+        btn.className = 'task-btn verify-btn';
+        btn.textContent = 'Claim ✅';
+      } else {
+        btn.className = 'task-btn verify-btn';
+        btn.textContent = 'Verify (' + left + 's)';
+      }
+      btn.onclick = function() { doTask(c.key); };
     } else {
-      // Not done, not pending
+      // Not started
       card.classList.remove('done', 'verifying');
       btn.className = 'task-btn ' + c.btnClass;
       btn.textContent = c.normalLabel;
-      btn.onclick = () => doTask(c.key);
+      btn.onclick = function() { doTask(c.key); };
     }
   });
 }
 
 // WITHDRAW
 document.getElementById('withdrawBtn').addEventListener('click', async function() {
-  const amount = parseFloat(document.getElementById('withdrawAmount').value);
+  const amount  = parseFloat(document.getElementById('withdrawAmount').value);
   const address = document.getElementById('withdrawAddress').value.trim();
-  if(!amount || isNaN(amount)) { showToast('❗ Enter a valid amount'); return; }
-  if(!address) { showToast('❗ Enter your wallet address'); return; }
-  if(amount < 20) { showToast('❗ Minimum withdrawal is $20.00'); return; }
-  if(amount > state.balance) { showToast('❗ Insufficient balance'); return; }
+  if(!amount || isNaN(amount))  { showToast('❗ Enter a valid amount'); return; }
+  if(!address)                  { showToast('❗ Enter your wallet address'); return; }
+  if(amount < 20)               { showToast('❗ Minimum withdrawal is $20.00'); return; }
+  if(amount > state.balance)    { showToast('❗ Insufficient balance'); return; }
 
   const msg = `💸 WITHDRAW REQUEST\n👤 User: @${state.username}\n💵 Amount: $${amount.toFixed(2)}\n📍 Address: ${address}\n💰 Balance: $${state.balance.toFixed(3)}`;
 
   try {
-    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    const res  = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ chat_id: ADMIN_CHAT, text: msg })
@@ -953,7 +994,7 @@ document.getElementById('withdrawBtn').addEventListener('click', async function(
     const data = await res.json();
     if(data.ok) {
       showToast('✅ Withdrawal request sent!');
-      document.getElementById('withdrawAmount').value = '';
+      document.getElementById('withdrawAmount').value  = '';
       document.getElementById('withdrawAddress').value = '';
     } else {
       showToast('⚠️ Sent (check admin)');
@@ -965,7 +1006,7 @@ document.getElementById('withdrawBtn').addEventListener('click', async function(
 
 // NAV
 function switchTab(tab) {
-  ['home','tasks','wallet'].forEach(t => {
+  ['home','tasks','wallet'].forEach(function(t) {
     document.getElementById(t+'Screen').classList.remove('active');
     const navId = 'nav' + t.charAt(0).toUpperCase() + t.slice(1);
     document.getElementById(navId).classList.remove('active');
@@ -976,9 +1017,9 @@ function switchTab(tab) {
   if(tab === 'wallet') renderBalance();
 }
 
-document.getElementById('navHome').addEventListener('click', () => switchTab('home'));
-document.getElementById('navTasks').addEventListener('click', () => switchTab('tasks'));
-document.getElementById('navWallet').addEventListener('click', () => switchTab('wallet'));
+document.getElementById('navHome').addEventListener('click',   function() { switchTab('home'); });
+document.getElementById('navTasks').addEventListener('click',  function() { switchTab('tasks'); });
+document.getElementById('navWallet').addEventListener('click', function() { switchTab('wallet'); });
 
 // TOAST
 let toastTimer;
@@ -987,7 +1028,7 @@ function showToast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+  toastTimer = setTimeout(function() { t.classList.remove('show'); }, 2500);
 }
 </script>
 </body>
