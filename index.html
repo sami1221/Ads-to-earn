@@ -165,21 +165,28 @@
   .balance-label { color: var(--muted); font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
   .eye-btn {
     background: none; border: none; cursor: pointer; color: var(--muted);
-    font-size: 18px; padding: 4px;
-    /* Fix: make sure it's above the ::before pseudo-element */
-    position: relative; z-index: 2;
+    font-size: 22px; padding: 8px;
+    position: relative; z-index: 10;
+    /* Larger tap area for mobile */
+    min-width: 44px; min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    -webkit-tap-highlight-color: transparent;
   }
   .balance-value {
     font-family: 'Orbitron', monospace; font-size: 32px; font-weight: 900;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1;
+    line-height: 1;
+    /* No webkit gradient here — handled by JS innerHTML swap */
   }
-  /* Hidden state: override gradient with plain muted color */
-  .balance-value.hidden {
-    background: none;
-    -webkit-background-clip: unset;
-    -webkit-text-fill-color: var(--muted);
+  .balance-shown {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  .balance-hidden-text {
     color: var(--muted);
+    /* No gradient, no webkit fill — plain color works in all WebViews */
   }
   .balance-usd { color: var(--muted); font-size: 12px; margin-top: 4px; }
 
@@ -750,19 +757,20 @@ function renderProfile() {
 
 // =============================================
 // FIX 1: BALANCE HIDE / SHOW
-// The issue was -webkit-text-fill-color overrides color.
-// We toggle a CSS class "hidden" that overrides both.
+// Telegram WebView ignores CSS overrides on -webkit-text-fill-color.
+// Solution: swap innerHTML between a gradient <span> and a plain <span>.
+// Plain color always works; gradient span only applied when visible.
 // =============================================
 function renderBalance() {
   const bal = state.balance.toFixed(3);
   const balEl = document.getElementById('balanceDisplay');
 
   if(state.balanceHidden) {
-    balEl.textContent = '••••••';
-    balEl.classList.add('hidden');
+    // Plain span — no gradient, no webkit fill. Works everywhere.
+    balEl.innerHTML = '<span class="balance-hidden-text">••••••</span>';
   } else {
-    balEl.textContent = '$' + bal;
-    balEl.classList.remove('hidden');
+    // Gradient span — normal visible state
+    balEl.innerHTML = '<span class="balance-shown">$' + bal + '</span>';
   }
 
   document.getElementById('walletBalanceVal').textContent = '$' + bal;
@@ -784,6 +792,7 @@ function renderBalance() {
 }
 
 document.getElementById('eyeBtn').addEventListener('click', function(e) {
+  e.preventDefault();
   e.stopPropagation();
   state.balanceHidden = !state.balanceHidden;
   save();
