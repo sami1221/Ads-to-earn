@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Ads to Earn</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<!-- ✅ Monetag SDK - ትክክለኛ Zone ID -->
-<script src='//libtl.com/sdk.js' data-zone='3381526' data-sdk='show_3381526'></script>
+<script src='//libtl.com/sdk.js' data-zone='11186811' data-sdk='show_11186811'></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
@@ -25,8 +24,7 @@
   }
 
   html, body {
-    height: 100%;
-    width: 100%;
+    height: 100%; width: 100%;
     overflow: hidden;
     background: var(--bg);
     color: var(--text);
@@ -34,606 +32,255 @@
     font-size: 14px;
   }
 
-  #app {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
+  #app { height: 100vh; width: 100vw; display: flex; flex-direction: column; overflow: hidden; }
 
-  .screen {
-    display: none;
-    flex: 1;
-    overflow: hidden;
-    flex-direction: column;
-  }
+  .screen { display: none; flex: 1; overflow: hidden; flex-direction: column; }
   .screen.active { display: flex; }
 
+  /* REGISTER */
   #register-screen {
-    background: var(--bg);
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    text-align: center;
+    background: var(--bg); align-items: center;
+    justify-content: center; padding: 24px; text-align: center;
   }
-
   .reg-logo {
-    width: 80px;
-    height: 80px;
-    background: var(--gradient);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-    margin: 0 auto 20px;
-    box-shadow: 0 0 40px rgba(108,99,255,0.5);
+    width: 80px; height: 80px; background: var(--gradient);
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 36px; margin: 0 auto 20px;
     animation: pulse 2s infinite;
   }
-
   @keyframes pulse {
     0%,100% { box-shadow: 0 0 30px rgba(108,99,255,0.4); }
     50% { box-shadow: 0 0 60px rgba(108,99,255,0.8); }
   }
-
   .reg-title {
-    font-size: 26px;
-    font-weight: 800;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
+    font-size: 26px; font-weight: 800;
+    background: var(--gradient); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; margin-bottom: 8px;
   }
-
-  .reg-sub {
-    color: var(--muted);
-    font-size: 13px;
-    margin-bottom: 32px;
-    line-height: 1.5;
-  }
-
-  .input-wrap {
-    width: 100%;
-    position: relative;
-    margin-bottom: 16px;
-  }
-
-  .input-wrap .icon {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-  }
-
+  .reg-sub { color: var(--muted); font-size: 13px; margin-bottom: 32px; line-height: 1.5; }
+  .input-wrap { width: 100%; position: relative; margin-bottom: 16px; }
+  .input-wrap .icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 18px; }
   .input-wrap input {
-    width: 100%;
-    background: var(--card);
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-    padding: 14px 14px 14px 42px;
-    color: var(--text);
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.2s;
+    width: 100%; background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 14px; padding: 14px 14px 14px 42px; color: var(--text);
+    font-size: 15px; outline: none; transition: border-color 0.2s;
   }
-
   .input-wrap input:focus { border-color: var(--accent); }
   .input-wrap input::placeholder { color: var(--muted); }
-
   .btn-primary {
-    width: 100%;
-    background: var(--gradient);
-    border: none;
-    border-radius: 14px;
-    padding: 15px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
-    letter-spacing: 0.5px;
+    width: 100%; background: var(--gradient); border: none;
+    border-radius: 14px; padding: 15px; color: #fff; font-size: 16px;
+    font-weight: 700; cursor: pointer; letter-spacing: 0.5px;
   }
-
   .btn-primary:active { transform: scale(0.97); opacity: 0.9; }
 
+  /* NAV */
   .bottom-nav {
-    display: flex;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
-    flex-shrink: 0;
+    display: flex; background: var(--surface); border-top: 1px solid var(--border);
+    padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); flex-shrink: 0;
   }
-
   .nav-btn {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 6px 0;
-    transition: color 0.2s;
-    letter-spacing: 0.3px;
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+    background: none; border: none; color: var(--muted); font-size: 10px;
+    font-weight: 600; cursor: pointer; padding: 6px 0; transition: color 0.2s;
   }
-
   .nav-btn .nav-icon { font-size: 20px; transition: transform 0.2s; }
   .nav-btn.active { color: var(--accent); }
   .nav-btn.active .nav-icon { transform: scale(1.15); }
 
-  .page {
-    display: none;
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 16px;
-    padding-bottom: 8px;
-  }
+  /* PAGES */
+  .page { display: none; flex: 1; overflow-y: auto; overflow-x: hidden; padding: 16px; padding-bottom: 8px; }
   .page.active { display: block; }
 
+  /* HOME */
   .profile-card {
-    background: var(--gradient);
-    border-radius: 20px;
-    padding: 16px;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    position: relative;
-    overflow: hidden;
+    background: var(--gradient); border-radius: 20px; padding: 16px;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 14px;
+    position: relative; overflow: hidden;
   }
-
   .profile-card::after {
-    content: '';
-    position: absolute;
-    top: -30px;
-    right: -30px;
-    width: 120px;
-    height: 120px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 50%;
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 120px; height: 120px; background: rgba(255,255,255,0.08); border-radius: 50%;
   }
 
   .avatar {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
+    width: 56px; height: 56px; border-radius: 50%;
     background: rgba(255,255,255,0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    flex-shrink: 0;
-    border: 2px solid rgba(255,255,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; flex-shrink: 0;
+    border: 2.5px solid rgba(255,255,255,0.6);
+    overflow: hidden;
+  }
+  .avatar img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  }
+  .avatar-letter {
+    font-size: 24px; font-weight: 800; color: #fff;
   }
 
   .profile-info { flex: 1; }
   .profile-name { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 2px; }
   .profile-tag { font-size: 11px; color: rgba(255,255,255,0.75); margin-bottom: 4px; }
-
   .ads-earn-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-    border-radius: 20px;
-    padding: 3px 10px;
-    display: inline-block;
-    letter-spacing: 0.5px;
+    font-size: 13px; font-weight: 700; color: #fff;
+    background: rgba(255,255,255,0.2); border-radius: 20px;
+    padding: 3px 10px; display: inline-block;
   }
 
-  .balance-card {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 16px;
-    margin-bottom: 14px;
-    border: 1px solid var(--border);
-  }
-
-  .balance-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-
-  .balance-label { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
-
+  /* BALANCE */
+  .balance-card { background: var(--card); border-radius: 18px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); }
+  .balance-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .balance-label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
   .toggle-btn {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 4px 12px;
-    color: var(--accent);
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 12px; color: var(--accent); font-size: 11px; font-weight: 700; cursor: pointer;
   }
-
-  .balance-amount {
-    font-size: 30px;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: -0.5px;
-    transition: filter 0.3s;
-  }
-
+  .balance-amount { font-size: 30px; font-weight: 900; color: var(--gold); letter-spacing: -0.5px; transition: filter 0.3s; }
   .balance-amount.hidden { filter: blur(8px); user-select: none; }
   .balance-usd { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-  .ads-progress-card {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 16px;
-    margin-bottom: 14px;
-    border: 1px solid var(--border);
-  }
-
-  .section-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--muted);
-    margin-bottom: 12px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  .progress-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-
+  /* ADS PROGRESS */
+  .ads-progress-card { background: var(--card); border-radius: 18px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); }
+  .section-title { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; }
+  .progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   .progress-count { font-size: 20px; font-weight: 800; color: var(--text); }
   .progress-max { font-size: 12px; color: var(--muted); }
-
-  .progress-bar {
-    height: 8px;
-    background: var(--surface);
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 10px;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: var(--gradient);
-    border-radius: 20px;
-    transition: width 0.5s ease;
-  }
-
+  .progress-bar { height: 8px; background: var(--surface); border-radius: 20px; overflow: hidden; margin-bottom: 10px; }
+  .progress-fill { height: 100%; background: var(--gradient); border-radius: 20px; transition: width 0.5s ease; }
   .watch-btn {
-    width: 100%;
-    background: var(--gradient);
-    border: none;
-    border-radius: 12px;
-    padding: 13px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
+    width: 100%; background: var(--gradient); border: none; border-radius: 12px;
+    padding: 13px; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
   }
-
   .watch-btn:active { transform: scale(0.97); }
   .watch-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
   .bonus-badge {
-    background: linear-gradient(135deg, #ff6584, #ffd700);
-    border-radius: 12px;
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
+    background: linear-gradient(135deg, #ff6584, #ffd700); border-radius: 12px;
+    padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+    margin-top: 10px; font-size: 13px; font-weight: 700; color: #fff;
   }
 
   /* TAP FULL SCREEN */
-  #page-tap {
-    padding: 0 !important;
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
+  #page-tap { padding: 0 !important; display: none; flex-direction: column; overflow: hidden; }
   #page-tap.active { display: flex !important; }
-
   .tap-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
-    padding: 30px 20px 20px;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: space-between; height: 100%; width: 100%; padding: 30px 20px 20px;
   }
-
-  .tap-top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .coin-score {
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: -0.5px;
-  }
-
+  .coin-score { font-size: 28px; font-weight: 900; color: var(--gold); }
   .coin-icon {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
+    width: 220px; height: 220px; border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #ffd966, #e6a817, #a07000);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    user-select: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; user-select: none;
     box-shadow: 0 0 0 18px rgba(255,215,0,0.12), 0 12px 48px rgba(255,215,0,0.4);
-    transition: transform 0.08s, box-shadow 0.08s;
-    flex-shrink: 0;
+    transition: transform 0.08s;
   }
-
-  .coin-icon:active {
-    transform: scale(0.93);
-    box-shadow: 0 0 0 8px rgba(255,215,0,0.08), 0 6px 20px rgba(255,215,0,0.2);
-  }
-
-  .coin-label {
-    font-size: 52px;
-    font-weight: 900;
-    color: rgba(255,255,255,0.85);
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    pointer-events: none;
-  }
-
+  .coin-icon:active { transform: scale(0.93); }
+  .coin-label { font-size: 52px; font-weight: 900; color: rgba(255,255,255,0.85); pointer-events: none; }
   .tap-bottom { width: 100%; }
-
-  .buy-ads-card {
-    width: 100%;
-    background: var(--card);
-    border-radius: 18px;
-    padding: 16px;
-    border: 1px solid var(--border);
-    text-align: center;
-  }
-
-  .buy-ads-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 10px;
-  }
-
+  .buy-ads-card { background: var(--card); border-radius: 18px; padding: 16px; border: 1px solid var(--border); text-align: center; }
+  .buy-ads-title { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
   .buy-ads-price { font-size: 11px; color: var(--gold); margin-bottom: 10px; }
-
-  .buy-input-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
+  .buy-input-row { display: flex; gap: 8px; align-items: center; }
   .buy-input-row input {
-    flex: 1;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px;
-    color: var(--text);
-    font-size: 14px;
-    text-align: center;
-    outline: none;
+    flex: 1; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px; color: var(--text); font-size: 14px; text-align: center; outline: none;
   }
-
   .btn-buy {
-    background: var(--gradient);
-    border: none;
-    border-radius: 10px;
-    padding: 10px 16px;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    white-space: nowrap;
+    background: var(--gradient); border: none; border-radius: 10px;
+    padding: 10px 16px; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer;
   }
 
+  /* TASK */
   .task-header { text-align: center; margin-bottom: 20px; }
-
   .task-title {
-    font-size: 20px;
-    font-weight: 900;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 4px;
+    font-size: 20px; font-weight: 900;
+    background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px;
   }
-
   .task-sub { font-size: 12px; color: var(--muted); }
-
   .task-card {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 16px;
-    margin-bottom: 12px;
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: border-color 0.2s;
+    background: var(--card); border-radius: 18px; padding: 16px;
+    margin-bottom: 12px; border: 1px solid var(--border);
+    display: flex; align-items: center; gap: 14px; transition: border-color 0.2s;
   }
-
   .task-card.done { border-color: var(--green); }
 
   .task-icon-wrap {
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    flex-shrink: 0;
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; overflow: hidden;
   }
-
-  .task-icon-tiktok { background: linear-gradient(135deg, #010101, #69c9d0); }
-  .task-icon-telegram { background: linear-gradient(135deg, #0088cc, #29b6f6); }
-  .task-icon-youtube { background: linear-gradient(135deg, #ff0000, #ff6584); }
+  .task-icon-wrap svg { width: 52px; height: 52px; }
 
   .task-info { flex: 1; }
   .task-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
   .task-reward { font-size: 12px; color: var(--gold); font-weight: 600; }
-
   .task-action-btn {
-    background: var(--gradient);
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: opacity 0.2s;
-    flex-shrink: 0;
+    background: var(--gradient); border: none; border-radius: 20px;
+    padding: 8px 16px; color: #fff; font-size: 12px; font-weight: 700;
+    cursor: pointer; white-space: nowrap; flex-shrink: 0;
   }
-
   .task-action-btn.done-btn { background: var(--green); color: #000; cursor: default; }
   .task-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  .wallet-balance {
-    background: var(--gradient);
-    border-radius: 20px;
-    padding: 24px;
-    text-align: center;
-    margin-bottom: 16px;
-  }
-
-  .wallet-bal-label { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-  .wallet-bal-amount { font-size: 36px; font-weight: 900; color: #fff; letter-spacing: -1px; }
+  /* WALLET */
+  .wallet-balance { background: var(--gradient); border-radius: 20px; padding: 24px; text-align: center; margin-bottom: 16px; }
+  .wallet-bal-label { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+  .wallet-bal-amount { font-size: 36px; font-weight: 900; color: #fff; }
   .wallet-bal-min { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 4px; }
-
-  .withdraw-card {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 20px;
-    border: 1px solid var(--border);
-  }
-
-  .w-label { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
-
+  .withdraw-card { background: var(--card); border-radius: 18px; padding: 20px; border: 1px solid var(--border); }
+  .w-label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
   .w-input {
-    width: 100%;
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    padding: 13px;
-    color: var(--text);
-    font-size: 15px;
-    outline: none;
-    margin-bottom: 14px;
-    transition: border-color 0.2s;
+    width: 100%; background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 13px; color: var(--text); font-size: 15px;
+    outline: none; margin-bottom: 14px;
   }
-
   .w-input:focus { border-color: var(--accent); }
   .w-input::placeholder { color: var(--muted); }
-
   .withdraw-btn {
-    width: 100%;
-    background: var(--gradient);
-    border: none;
-    border-radius: 14px;
-    padding: 15px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
+    width: 100%; background: var(--gradient); border: none; border-radius: 14px;
+    padding: 15px; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
   }
 
-  .withdraw-btn:active { transform: scale(0.97); }
-
+  /* TOAST */
   .toast {
-    position: fixed;
-    top: 20px;
-    left: 50%;
+    position: fixed; top: 20px; left: 50%;
     transform: translateX(-50%) translateY(-80px);
-    background: var(--card);
-    border-radius: 14px;
-    padding: 12px 20px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    border: 1px solid var(--border);
-    z-index: 9999;
+    background: var(--card); border-radius: 14px; padding: 12px 20px;
+    font-size: 13px; font-weight: 600; color: var(--text);
+    border: 1px solid var(--border); z-index: 9999;
     transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-    white-space: nowrap;
-    max-width: 90vw;
-    text-align: center;
+    white-space: nowrap; max-width: 90vw; text-align: center;
   }
-
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.success { border-color: var(--green); color: var(--green); }
   .toast.error { border-color: var(--accent2); color: var(--accent2); }
   .toast.gold { border-color: var(--gold); color: var(--gold); }
 
+  /* AD OVERLAY */
   #ad-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    z-index: 1000;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    text-align: center;
-    padding: 30px;
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85); z-index: 1000;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 20px; text-align: center; padding: 30px;
   }
-
   #ad-overlay.show { display: flex; }
-
   .ad-box {
-    background: var(--card);
-    border-radius: 20px;
-    padding: 24px;
-    width: 100%;
-    max-width: 320px;
-    border: 1px solid var(--border);
+    background: var(--card); border-radius: 20px; padding: 24px;
+    width: 100%; max-width: 320px; border: 1px solid var(--border);
   }
-
   .ad-timer { font-size: 40px; font-weight: 900; color: var(--gold); margin: 16px 0; }
   .ad-earning { font-size: 13px; color: var(--muted); }
 
+  /* FLOAT */
   .tap-float {
-    position: fixed;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--gold);
-    pointer-events: none;
-    animation: floatUp 0.8s ease forwards;
-    z-index: 999;
+    position: fixed; font-size: 20px; font-weight: 800; color: var(--gold);
+    pointer-events: none; animation: floatUp 0.8s ease forwards; z-index: 999;
   }
-
   @keyframes floatUp {
     0% { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; transform: translateY(-80px); }
   }
-
   .scrollable { overflow-y: auto; height: 100%; }
 </style>
 </head>
@@ -644,7 +291,7 @@
   <div id="register-screen" class="screen active">
     <div class="reg-logo">💎</div>
     <div class="reg-title">Ads to Earn</div>
-    <div class="reg-sub">Watch ads, earn real money!<br>Register with your Telegram username to get started.</div>
+    <div class="reg-sub">Watch ads, earn real money!<br>Register with your Telegram username.</div>
     <div class="input-wrap">
       <span class="icon">@</span>
       <input type="text" id="reg-username" placeholder="Your Telegram username" autocomplete="off">
@@ -659,7 +306,9 @@
       <!-- HOME -->
       <div id="page-home" class="page active scrollable">
         <div class="profile-card">
-          <div class="avatar" id="home-avatar">👤</div>
+          <div class="avatar" id="home-avatar">
+            <span class="avatar-letter" id="avatar-letter">👤</span>
+          </div>
           <div class="profile-info">
             <div class="profile-name" id="home-name">User</div>
             <div class="profile-tag" id="home-tag">@username</div>
@@ -693,10 +342,8 @@
       <!-- TAP -->
       <div id="page-tap" class="page">
         <div class="tap-container">
-          <div class="tap-top">
-            <div class="coin-score">🪙 <span id="tap-coins">0</span> Coins</div>
-          </div>
-          <div class="coin-icon" id="coin-btn" onclick="tapCoin(event)">
+          <div class="coin-score">🪙 <span id="tap-coins">0</span> Coins</div>
+          <div class="coin-icon" onclick="tapCoin(event)">
             <span class="coin-label">TS</span>
           </div>
           <div class="tap-bottom">
@@ -719,8 +366,17 @@
           <div class="task-sub">Complete tasks to earn bonus rewards</div>
         </div>
 
+        <!-- TikTok -->
         <div class="task-card" id="task-card-tiktok">
-          <div class="task-icon-wrap task-icon-tiktok">🎵</div>
+          <div class="task-icon-wrap">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <rect width="52" height="52" rx="12" fill="#010101"/>
+              <path d="M36.5 14.2c-1.8-1.2-3.1-3-3.6-5.2h-4.6v23.1c0 2.3-1.9 4.2-4.2 4.2s-4.2-1.9-4.2-4.2 1.9-4.2 4.2-4.2c.4 0 .8.1 1.2.2v-4.7c-.4-.1-.8-.1-1.2-.1-4.9 0-8.8 3.9-8.8 8.8s3.9 8.8 8.8 8.8 8.8-3.9 8.8-8.8V21.5c1.9 1.4 4.3 2.2 6.8 2.2v-4.6c-1.3 0-2.5-.3-3.2-.9z" fill="white"/>
+              <path d="M36.5 14.2c-1.8-1.2-3.1-3-3.6-5.2h-4.6v23.1c0 2.3-1.9 4.2-4.2 4.2s-4.2-1.9-4.2-4.2 1.9-4.2 4.2-4.2c.4 0 .8.1 1.2.2v-4.7c-.4-.1-.8-.1-1.2-.1-4.9 0-8.8 3.9-8.8 8.8s3.9 8.8 8.8 8.8 8.8-3.9 8.8-8.8V21.5c1.9 1.4 4.3 2.2 6.8 2.2v-4.6c-1.3 0-2.5-.3-3.2-.9z" fill="#69C9D0" transform="translate(-2,-2)"/>
+              <path d="M36.5 14.2c-1.8-1.2-3.1-3-3.6-5.2h-4.6v23.1c0 2.3-1.9 4.2-4.2 4.2s-4.2-1.9-4.2-4.2 1.9-4.2 4.2-4.2c.4 0 .8.1 1.2.2v-4.7c-.4-.1-.8-.1-1.2-.1-4.9 0-8.8 3.9-8.8 8.8s3.9 8.8 8.8 8.8 8.8-3.9 8.8-8.8V21.5c1.9 1.4 4.3 2.2 6.8 2.2v-4.6c-1.3 0-2.5-.3-3.2-.9z" fill="#EE1D52" transform="translate(2,2)"/>
+              <path d="M36.5 14.2c-1.8-1.2-3.1-3-3.6-5.2h-4.6v23.1c0 2.3-1.9 4.2-4.2 4.2s-4.2-1.9-4.2-4.2 1.9-4.2 4.2-4.2c.4 0 .8.1 1.2.2v-4.7c-.4-.1-.8-.1-1.2-.1-4.9 0-8.8 3.9-8.8 8.8s3.9 8.8 8.8 8.8 8.8-3.9 8.8-8.8V21.5c1.9 1.4 4.3 2.2 6.8 2.2v-4.6c-1.3 0-2.5-.3-3.2-.9z" fill="white"/>
+            </svg>
+          </div>
           <div class="task-info">
             <div class="task-name">Follow on TikTok</div>
             <div class="task-reward">+$0.01 reward</div>
@@ -728,22 +384,43 @@
           <button class="task-action-btn" id="task-btn-tiktok" onclick="startTask('tiktok')">Follow</button>
         </div>
 
-        <div class="task-card" id="task-card-telegram">
-          <div class="task-icon-wrap task-icon-telegram">✈️</div>
-          <div class="task-info">
-            <div class="task-name">Join Telegram Channel</div>
-            <div class="task-reward">+$0.01 reward</div>
-          </div>
-          <button class="task-action-btn" id="task-btn-telegram" onclick="startTask('telegram')">Join</button>
-        </div>
-
+        <!-- YouTube -->
         <div class="task-card" id="task-card-youtube">
-          <div class="task-icon-wrap task-icon-youtube">▶️</div>
+          <div class="task-icon-wrap">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <rect width="52" height="52" rx="12" fill="white"/>
+              <path d="M43.5 17.5s-.4-2.8-1.7-4c-1.6-1.7-3.4-1.7-4.2-1.8C32.8 11.4 26 11.4 26 11.4s-6.8 0-11.6.3c-.8.1-2.6.1-4.2 1.8-1.3 1.3-1.7 4-1.7 4S8 20.7 8 24v3.1c0 3.2.5 6.4.5 6.4s.4 2.8 1.7 4c1.6 1.7 3.7 1.6 4.7 1.8C17.9 39.6 26 39.7 26 39.7s6.8 0 11.6-.4c.8-.1 2.6-.1 4.2-1.8 1.3-1.3 1.7-4 1.7-4s.5-3.2.5-6.4V24c0-3.3-.5-6.5-.5-6.5z" fill="#FF0000"/>
+              <polygon points="22,20 22,32 33,26" fill="white"/>
+            </svg>
+          </div>
           <div class="task-info">
             <div class="task-name">Subscribe on YouTube</div>
             <div class="task-reward">+$0.01 reward</div>
           </div>
           <button class="task-action-btn" id="task-btn-youtube" onclick="startTask('youtube')">Subscribe</button>
+        </div>
+
+        <!-- Telegram -->
+        <div class="task-card" id="task-card-telegram">
+          <div class="task-icon-wrap">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="tgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#2AABEE"/>
+                  <stop offset="100%" style="stop-color:#229ED9"/>
+                </linearGradient>
+              </defs>
+              <rect width="52" height="52" rx="12" fill="url(#tgGrad)"/>
+              <path d="M38.5 13.5L8.5 25.2c-2 .8-2 2 0 2.5l7.7 2.4 2.8 8.5c.4 1.1 1.1 1.3 1.8.7l4-3.9 7.8 5.7c1.4.8 2.4.4 2.8-1.3l5-23.5c.4-2-.7-2.9-2.4-2.3z" fill="white" opacity="0.9"/>
+              <path d="M19 29.5l-.8 7.5 3.8-3.7-3-3.8z" fill="#C8DAEA"/>
+              <path d="M19 29.5l14-8.8-10 10-4 7.5.8-7.5-0.8-1.2z" fill="#A9C9DD"/>
+            </svg>
+          </div>
+          <div class="task-info">
+            <div class="task-name">Join Telegram Channel</div>
+            <div class="task-reward">+$0.01 reward</div>
+          </div>
+          <button class="task-action-btn" id="task-btn-telegram" onclick="startTask('telegram')">Join</button>
         </div>
       </div>
 
@@ -787,7 +464,7 @@
     <div class="ad-box">
       <div style="font-size:13px;color:var(--muted);font-weight:600;">📺 WATCHING AD</div>
       <div class="ad-timer" id="ad-timer">5</div>
-      <div class="ad-earning" id="ad-earn-text">Earning $0.00007...</div>
+      <div class="ad-earning" id="ad-earn-text">Earning...</div>
     </div>
     <div style="font-size:12px;color:var(--muted);">Please wait for the ad to complete</div>
   </div>
@@ -796,9 +473,14 @@
 </div>
 
 <script>
+// ✅ BOT TOKEN እና CHAT ID
+const BOT_TOKEN = '8998521749:AAFwoFANkB60kOGZVf1iUkMxm25n6gbPeKU';
+const ADMIN_CHAT = '@sami219';
+
 let state = {
   username: '',
   firstName: '',
+  photoUrl: '',
   balance: 0,
   coins: 0,
   adsToday: 0,
@@ -814,8 +496,16 @@ function saveState() {
 
 function loadState() {
   const s = localStorage.getItem('ats_state');
-  if (s) {
-    try { state = { ...state, ...JSON.parse(s) }; } catch(e) {}
+  if (s) { try { state = { ...state, ...JSON.parse(s) }; } catch(e) {} }
+}
+
+function setAvatar(photoUrl, name) {
+  const avatarEl = document.getElementById('home-avatar');
+  const letterEl = document.getElementById('avatar-letter');
+  if (photoUrl) {
+    avatarEl.innerHTML = `<img src="${photoUrl}" alt="avatar" onerror="this.parentElement.innerHTML='<span class=\\'avatar-letter\\'>${(name||'U')[0].toUpperCase()}</span>'">`;
+  } else {
+    if (letterEl) letterEl.textContent = (name || 'U')[0].toUpperCase();
   }
 }
 
@@ -824,6 +514,7 @@ function register() {
   if (!uname) { showToast('⚠️ Please enter your username', 'error'); return; }
   state.username = uname;
   state.firstName = uname;
+  state.photoUrl = '';
   saveState();
   showApp();
 }
@@ -836,25 +527,29 @@ function showApp() {
 
 window.addEventListener('DOMContentLoaded', () => {
   loadState();
+
   if (window.Telegram && Telegram.WebApp) {
     Telegram.WebApp.ready();
     Telegram.WebApp.expand();
     const tgUser = Telegram.WebApp.initDataUnsafe?.user;
     if (tgUser) {
-      state.username = tgUser.username || tgUser.id;
+      state.username = tgUser.username || String(tgUser.id);
       state.firstName = tgUser.first_name || tgUser.username || 'User';
+      state.photoUrl = tgUser.photo_url || '';
       saveState();
       showApp();
       return;
     }
   }
+
   if (state.username) showApp();
 });
 
 function updateUI() {
   document.getElementById('home-name').textContent = state.firstName || state.username;
   document.getElementById('home-tag').textContent = '@' + state.username;
-  document.getElementById('home-avatar').textContent = (state.firstName || state.username || 'U')[0].toUpperCase();
+
+  setAvatar(state.photoUrl, state.firstName || state.username);
 
   const bal = state.balance.toFixed(5);
   document.getElementById('home-balance').textContent = '$' + bal;
@@ -867,7 +562,7 @@ function updateUI() {
   if (state.adsToday >= 60) {
     watchBtn.disabled = true;
     watchBtn.textContent = '✅ Daily limit reached!';
-    document.getElementById('bonus-container').innerHTML = `<div class="bonus-badge">🎉 +$0.001 Bonus Earned! Watch again tomorrow.</div>`;
+    document.getElementById('bonus-container').innerHTML = `<div class="bonus-badge">🎉 +$0.001 Bonus! Watch again tomorrow.</div>`;
   } else {
     watchBtn.disabled = false;
     watchBtn.textContent = '▶ Watch Ad & Earn';
@@ -894,19 +589,13 @@ function updateUI() {
 function applyBalanceVisibility() {
   const el = document.getElementById('home-balance');
   const btn = document.getElementById('toggle-bal-btn');
-  if (state.balanceVisible) {
-    el.classList.remove('hidden');
-    btn.textContent = 'Hide';
-  } else {
-    el.classList.add('hidden');
-    btn.textContent = 'Show';
-  }
+  if (state.balanceVisible) { el.classList.remove('hidden'); btn.textContent = 'Hide'; }
+  else { el.classList.add('hidden'); btn.textContent = 'Show'; }
 }
 
 function toggleBalance() {
   state.balanceVisible = !state.balanceVisible;
-  saveState();
-  applyBalanceVisibility();
+  saveState(); applyBalanceVisibility();
 }
 
 function switchPage(name, btn) {
@@ -916,23 +605,26 @@ function switchPage(name, btn) {
   btn.classList.add('active');
 }
 
+// ✅ watchAd - SDK check + real ad
 function watchAd() {
   if (state.adsToday >= 60) { showToast('✅ You reached today\'s limit!', 'error'); return; }
-  
+
   const earning = (Math.random() * (0.0001 - 0.00005) + 0.00005).toFixed(5);
-  
-  // ✅ Monetag Rewarded Popup - show_3381526() በቀጥታ ጥራ
-  if (typeof show_3381526 === 'function') {
-    show_3381526();
+
+  // ✅ SDK check - ትክክለኛ zone ID
+  if (typeof show_11186811 === 'function') {
+    show_11186811();
+  } else {
+    showToast('⚠️ Ad loading...', '');
   }
 
-  // Overlay አሳይ
   const overlay = document.getElementById('ad-overlay');
   overlay.classList.add('show');
   document.getElementById('ad-earn-text').textContent = 'Earning $' + earning + '...';
 
   let secs = 5;
   document.getElementById('ad-timer').textContent = secs;
+
   const interval = setInterval(() => {
     secs--;
     document.getElementById('ad-timer').textContent = secs;
@@ -947,17 +639,14 @@ function watchAd() {
       } else {
         showToast('+$' + earning + ' earned!', 'success');
       }
-      saveState();
-      updateUI();
+      saveState(); updateUI();
     }
   }, 1000);
 }
 
 function tapCoin(e) {
-  state.tapCount++;
-  state.coins++;
+  state.tapCount++; state.coins++;
   saveState();
-
   const float = document.createElement('div');
   float.className = 'tap-float';
   float.textContent = '+1';
@@ -965,17 +654,12 @@ function tapCoin(e) {
   float.style.top = (e.clientY - 20) + 'px';
   document.body.appendChild(float);
   setTimeout(() => float.remove(), 800);
-
   updateUI();
-
   if (state.tapCount >= state.tapTarget) {
     state.tapCount = 0;
     state.tapTarget = Math.floor(Math.random() * 11) + 10;
     saveState();
-    // ✅ Tap ad - Monetag show
-    if (typeof show_3381526 === 'function') {
-      show_3381526();
-    }
+    if (typeof show_11186811 === 'function') show_11186811();
     showToast('🪙 Keep tapping for more coins!', 'gold');
   }
 }
@@ -985,16 +669,11 @@ function buyAds() {
   const amount = parseInt(input.value);
   if (!amount || amount < 1) { showToast('⚠️ Enter a valid number', 'error'); return; }
   const cost = amount * 50;
-  if (cost > state.coins) {
-    showToast('❌ Not enough coins! Need ' + cost + ' coins', 'error');
-    return;
-  }
+  if (cost > state.coins) { showToast('❌ Not enough coins! Need ' + cost, 'error'); return; }
   state.coins -= cost;
   state.adsToday = Math.max(0, state.adsToday - amount);
-  saveState();
-  updateUI();
-  input.value = '';
-  showToast('✅ Bought ' + amount + ' ads! Daily limit refreshed.', 'success');
+  saveState(); updateUI(); input.value = '';
+  showToast('✅ Bought ' + amount + ' ads!', 'success');
 }
 
 const taskLinks = {
@@ -1002,17 +681,14 @@ const taskLinks = {
   telegram: 'https://t.me/adsgram12',
   youtube: 'https://www.youtube.com/@Adstoearn'
 };
-
 const taskPending = {};
 
 function startTask(type) {
   if (state.tasks[type]) return;
   const btn = document.getElementById('task-btn-' + type);
-  btn.disabled = true;
-  btn.textContent = '⏳ Checking...';
+  btn.disabled = true; btn.textContent = '⏳ Checking...';
   window.open(taskLinks[type], '_blank');
   taskPending[type] = Date.now();
-
   document.addEventListener('visibilitychange', function handler() {
     if (!document.hidden && taskPending[type]) {
       const elapsed = Date.now() - taskPending[type];
@@ -1021,23 +697,21 @@ function startTask(type) {
         btn.disabled = false;
         btn.textContent = { tiktok: 'Follow', telegram: 'Join', youtube: 'Subscribe' }[type];
         delete taskPending[type];
-        showToast('❌ Task too fast! Stay for at least 10 seconds.', 'error');
+        showToast('❌ Stay at least 10 seconds!', 'error');
       } else {
-        completeTask(type);
-        delete taskPending[type];
+        completeTask(type); delete taskPending[type];
       }
     }
   });
 }
 
 function completeTask(type) {
-  state.tasks[type] = true;
-  state.balance += 0.01;
-  saveState();
-  updateUI();
+  state.tasks[type] = true; state.balance += 0.01;
+  saveState(); updateUI();
   showToast('🎉 Task done! +$0.01 earned!', 'gold');
 }
 
+// ✅ Withdraw - ትክክለኛ BOT TOKEN
 async function requestWithdraw() {
   const amount = parseFloat(document.getElementById('w-amount').value);
   const address = document.getElementById('w-address').value.trim();
@@ -1046,28 +720,33 @@ async function requestWithdraw() {
   if (amount > state.balance) { showToast('❌ Insufficient balance', 'error'); return; }
 
   const msg = `💸 Withdraw Request\n👤 User: @${state.username}\n💰 Amount: $${amount.toFixed(2)}\n🏦 Wallet: ${address}`;
+
   try {
-    await fetch(`https://api.telegram.org/bot7700000000:REPLACE_WITH_BOT_TOKEN/sendMessage`, {
+    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: '@sami219', text: msg })
+      body: JSON.stringify({ chat_id: ADMIN_CHAT, text: msg })
     });
-    showToast('✅ Withdrawal request sent!', 'success');
+    const data = await res.json();
+    if (data.ok) {
+      showToast('✅ Request submitted!', 'success');
+      document.getElementById('w-amount').value = '';
+      document.getElementById('w-address').value = '';
+    } else {
+      showToast('⚠️ Send failed: ' + data.description, 'error');
+    }
   } catch(e) {
-    showToast('✅ Request submitted! We\'ll process soon.', 'success');
+    showToast('❌ Network error', 'error');
   }
-  document.getElementById('w-amount').value = '';
-  document.getElementById('w-address').value = '';
 }
 
 let toastTimeout;
 function showToast(msg, type = '') {
   const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = 'toast show ' + type;
+  el.textContent = msg; el.className = 'toast show ' + type;
   clearTimeout(toastTimeout);
   toastTimeout = setTimeout(() => el.classList.remove('show'), 3000);
 }
 </script>
 </body>
- </html>
+</html>
