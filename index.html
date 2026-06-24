@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Ads to Earn</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- ✅ Monetag SDK - ትክክለኛ Zone ID -->
+<script src='//libtl.com/sdk.js' data-zone='3381526' data-sdk='show_3381526'></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
@@ -48,7 +50,6 @@
   }
   .screen.active { display: flex; }
 
-  /* REGISTER */
   #register-screen {
     background: var(--bg);
     align-items: center;
@@ -137,7 +138,6 @@
 
   .btn-primary:active { transform: scale(0.97); opacity: 0.9; }
 
-  /* NAV */
   .bottom-nav {
     display: flex;
     background: var(--surface);
@@ -167,7 +167,6 @@
   .nav-btn.active { color: var(--accent); }
   .nav-btn.active .nav-icon { transform: scale(1.15); }
 
-  /* PAGES */
   .page {
     display: none;
     flex: 1;
@@ -178,7 +177,6 @@
   }
   .page.active { display: block; }
 
-  /* HOME */
   .profile-card {
     background: var(--gradient);
     border-radius: 20px;
@@ -216,19 +214,8 @@
   }
 
   .profile-info { flex: 1; }
-
-  .profile-name {
-    font-size: 16px;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 2px;
-  }
-
-  .profile-tag {
-    font-size: 11px;
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 4px;
-  }
+  .profile-name { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+  .profile-tag { font-size: 11px; color: rgba(255,255,255,0.75); margin-bottom: 4px; }
 
   .ads-earn-label {
     font-size: 13px;
@@ -256,13 +243,7 @@
     margin-bottom: 10px;
   }
 
-  .balance-label {
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
+  .balance-label { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
 
   .toggle-btn {
     background: var(--surface);
@@ -283,16 +264,8 @@
     transition: filter 0.3s;
   }
 
-  .balance-amount.hidden {
-    filter: blur(8px);
-    user-select: none;
-  }
-
-  .balance-usd {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
+  .balance-amount.hidden { filter: blur(8px); user-select: none; }
+  .balance-usd { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
   .ads-progress-card {
     background: var(--card);
@@ -318,16 +291,8 @@
     margin-bottom: 8px;
   }
 
-  .progress-count {
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--text);
-  }
-
-  .progress-max {
-    font-size: 12px;
-    color: var(--muted);
-  }
+  .progress-count { font-size: 20px; font-weight: 800; color: var(--text); }
+  .progress-max { font-size: 12px; color: var(--muted); }
 
   .progress-bar {
     height: 8px;
@@ -373,7 +338,7 @@
     color: #fff;
   }
 
-  /* TAP - FULL SCREEN */
+  /* TAP FULL SCREEN */
   #page-tap {
     padding: 0 !important;
     display: none;
@@ -381,9 +346,7 @@
     overflow: hidden;
   }
 
-  #page-tap.active {
-    display: flex !important;
-  }
+  #page-tap.active { display: flex !important; }
 
   .tap-container {
     display: flex;
@@ -417,7 +380,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 90px;
     cursor: pointer;
     user-select: none;
     box-shadow: 0 0 0 18px rgba(255,215,0,0.12), 0 12px 48px rgba(255,215,0,0.4);
@@ -438,9 +400,7 @@
     pointer-events: none;
   }
 
-  .tap-bottom {
-    width: 100%;
-  }
+  .tap-bottom { width: 100%; }
 
   .buy-ads-card {
     width: 100%;
@@ -460,11 +420,7 @@
     margin-bottom: 10px;
   }
 
-  .buy-ads-price {
-    font-size: 11px;
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
+  .buy-ads-price { font-size: 11px; color: var(--gold); margin-bottom: 10px; }
 
   .buy-input-row {
     display: flex;
@@ -496,11 +452,7 @@
     white-space: nowrap;
   }
 
-  /* TASK */
-  .task-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+  .task-header { text-align: center; margin-bottom: 20px; }
 
   .task-title {
     font-size: 20px;
@@ -511,10 +463,7 @@
     margin-bottom: 4px;
   }
 
-  .task-sub {
-    font-size: 12px;
-    color: var(--muted);
-  }
+  .task-sub { font-size: 12px; color: var(--muted); }
 
   .task-card {
     background: var(--card);
@@ -546,19 +495,8 @@
   .task-icon-youtube { background: linear-gradient(135deg, #ff0000, #ff6584); }
 
   .task-info { flex: 1; }
-
-  .task-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 3px;
-  }
-
-  .task-reward {
-    font-size: 12px;
-    color: var(--gold);
-    font-weight: 600;
-  }
+  .task-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .task-reward { font-size: 12px; color: var(--gold); font-weight: 600; }
 
   .task-action-btn {
     background: var(--gradient);
@@ -574,15 +512,9 @@
     flex-shrink: 0;
   }
 
-  .task-action-btn.done-btn {
-    background: var(--green);
-    color: #000;
-    cursor: default;
-  }
-
+  .task-action-btn.done-btn { background: var(--green); color: #000; cursor: default; }
   .task-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* WALLET */
   .wallet-balance {
     background: var(--gradient);
     border-radius: 20px;
@@ -591,27 +523,9 @@
     margin-bottom: 16px;
   }
 
-  .wallet-bal-label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.75);
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .wallet-bal-amount {
-    font-size: 36px;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -1px;
-  }
-
-  .wallet-bal-min {
-    font-size: 11px;
-    color: rgba(255,255,255,0.65);
-    margin-top: 4px;
-  }
+  .wallet-bal-label { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .wallet-bal-amount { font-size: 36px; font-weight: 900; color: #fff; letter-spacing: -1px; }
+  .wallet-bal-min { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 4px; }
 
   .withdraw-card {
     background: var(--card);
@@ -620,14 +534,7 @@
     border: 1px solid var(--border);
   }
 
-  .w-label {
-    font-size: 11px;
-    color: var(--muted);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
+  .w-label { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
 
   .w-input {
     width: 100%;
@@ -660,7 +567,6 @@
 
   .withdraw-btn:active { transform: scale(0.97); }
 
-  /* TOAST */
   .toast {
     position: fixed;
     top: 20px;
@@ -685,7 +591,6 @@
   .toast.error { border-color: var(--accent2); color: var(--accent2); }
   .toast.gold { border-color: var(--gold); color: var(--gold); }
 
-  /* AD OVERLAY */
   #ad-overlay {
     display: none;
     position: fixed;
@@ -711,19 +616,9 @@
     border: 1px solid var(--border);
   }
 
-  .ad-timer {
-    font-size: 40px;
-    font-weight: 900;
-    color: var(--gold);
-    margin: 16px 0;
-  }
+  .ad-timer { font-size: 40px; font-weight: 900; color: var(--gold); margin: 16px 0; }
+  .ad-earning { font-size: 13px; color: var(--muted); }
 
-  .ad-earning {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  /* Float tap coins */
   .tap-float {
     position: fixed;
     font-size: 20px;
@@ -795,7 +690,7 @@
         </div>
       </div>
 
-      <!-- TAP - FULL SCREEN -->
+      <!-- TAP -->
       <div id="page-tap" class="page">
         <div class="tap-container">
           <div class="tap-top">
@@ -893,7 +788,6 @@
       <div style="font-size:13px;color:var(--muted);font-weight:600;">📺 WATCHING AD</div>
       <div class="ad-timer" id="ad-timer">5</div>
       <div class="ad-earning" id="ad-earn-text">Earning $0.00007...</div>
-      <div id="ad-container" style="min-height:60px;display:flex;align-items:center;justify-content:center;"></div>
     </div>
     <div style="font-size:12px;color:var(--muted);">Please wait for the ad to complete</div>
   </div>
@@ -910,7 +804,6 @@ let state = {
   adsToday: 0,
   balanceVisible: true,
   tasks: { tiktok: false, telegram: false, youtube: false },
-  taskTimers: {},
   tapCount: 0,
   tapTarget: Math.floor(Math.random() * 11) + 10
 };
@@ -943,7 +836,6 @@ function showApp() {
 
 window.addEventListener('DOMContentLoaded', () => {
   loadState();
-
   if (window.Telegram && Telegram.WebApp) {
     Telegram.WebApp.ready();
     Telegram.WebApp.expand();
@@ -956,10 +848,7 @@ window.addEventListener('DOMContentLoaded', () => {
       return;
     }
   }
-
-  if (state.username) {
-    showApp();
-  }
+  if (state.username) showApp();
 });
 
 function updateUI() {
@@ -971,10 +860,8 @@ function updateUI() {
   document.getElementById('home-balance').textContent = '$' + bal;
   document.getElementById('wallet-balance').textContent = '$' + bal;
   document.getElementById('home-balance-usd').textContent = '≈ ' + (state.balance * 57).toFixed(2) + ' ETB';
-
   document.getElementById('ads-count').textContent = state.adsToday;
-  const pct = (state.adsToday / 60) * 100;
-  document.getElementById('ads-progress-fill').style.width = pct + '%';
+  document.getElementById('ads-progress-fill').style.width = (state.adsToday / 60 * 100) + '%';
 
   const watchBtn = document.getElementById('watch-btn');
   if (state.adsToday >= 60) {
@@ -1031,23 +918,18 @@ function switchPage(name, btn) {
 
 function watchAd() {
   if (state.adsToday >= 60) { showToast('✅ You reached today\'s limit!', 'error'); return; }
-  showAdOverlay();
-}
+  
+  const earning = (Math.random() * (0.0001 - 0.00005) + 0.00005).toFixed(5);
+  
+  // ✅ Monetag Rewarded Popup - show_3381526() በቀጥታ ጥራ
+  if (typeof show_3381526 === 'function') {
+    show_3381526();
+  }
 
-function showAdOverlay() {
+  // Overlay አሳይ
   const overlay = document.getElementById('ad-overlay');
   overlay.classList.add('show');
-
-  const earning = (Math.random() * (0.0001 - 0.00005) + 0.00005).toFixed(5);
   document.getElementById('ad-earn-text').textContent = 'Earning $' + earning + '...';
-
-  const adContainer = document.getElementById('ad-container');
-  adContainer.innerHTML = '';
-  const script = document.createElement('script');
-  script.src = '//libtl.com/sdk.js';
-  script.setAttribute('data-zone', '11186811');
-  script.setAttribute('data-sdk', 'show_11186811');
-  adContainer.appendChild(script);
 
   let secs = 5;
   document.getElementById('ad-timer').textContent = secs;
@@ -1057,7 +939,6 @@ function showAdOverlay() {
     if (secs <= 0) {
       clearInterval(interval);
       overlay.classList.remove('show');
-      adContainer.innerHTML = '';
       state.adsToday++;
       state.balance += parseFloat(earning);
       if (state.adsToday === 60) {
@@ -1091,35 +972,12 @@ function tapCoin(e) {
     state.tapCount = 0;
     state.tapTarget = Math.floor(Math.random() * 11) + 10;
     saveState();
-    showTapAd();
-  }
-}
-
-function showTapAd() {
-  const overlay = document.getElementById('ad-overlay');
-  overlay.classList.add('show');
-  document.getElementById('ad-earn-text').textContent = 'Bonus tap ad – no earnings for this one!';
-
-  const adContainer = document.getElementById('ad-container');
-  adContainer.innerHTML = '';
-  const script = document.createElement('script');
-  script.src = '//libtl.com/sdk.js';
-  script.setAttribute('data-zone', '11186811');
-  script.setAttribute('data-sdk', 'show_11186811');
-  adContainer.appendChild(script);
-
-  let secs = 3;
-  document.getElementById('ad-timer').textContent = secs;
-  const interval = setInterval(() => {
-    secs--;
-    document.getElementById('ad-timer').textContent = secs;
-    if (secs <= 0) {
-      clearInterval(interval);
-      overlay.classList.remove('show');
-      adContainer.innerHTML = '';
-      showToast('🪙 Keep tapping for more coins!', 'gold');
+    // ✅ Tap ad - Monetag show
+    if (typeof show_3381526 === 'function') {
+      show_3381526();
     }
-  }, 1000);
+    showToast('🪙 Keep tapping for more coins!', 'gold');
+  }
 }
 
 function buyAds() {
@@ -1152,17 +1010,8 @@ function startTask(type) {
   const btn = document.getElementById('task-btn-' + type);
   btn.disabled = true;
   btn.textContent = '⏳ Checking...';
-
   window.open(taskLinks[type], '_blank');
   taskPending[type] = Date.now();
-
-  setTimeout(() => {
-    if (!state.tasks[type]) {
-      btn.disabled = false;
-      btn.textContent = { tiktok: 'Follow', telegram: 'Join', youtube: 'Subscribe' }[type];
-      showToast('⚠️ Please complete the task (10s minimum)', 'error');
-    }
-  }, 500);
 
   document.addEventListener('visibilitychange', function handler() {
     if (!document.hidden && taskPending[type]) {
@@ -1192,13 +1041,11 @@ function completeTask(type) {
 async function requestWithdraw() {
   const amount = parseFloat(document.getElementById('w-amount').value);
   const address = document.getElementById('w-address').value.trim();
-
   if (!amount || amount < 2) { showToast('❌ Minimum withdrawal is $2.00', 'error'); return; }
   if (!address) { showToast('⚠️ Enter your wallet address', 'error'); return; }
   if (amount > state.balance) { showToast('❌ Insufficient balance', 'error'); return; }
 
   const msg = `💸 Withdraw Request\n👤 User: @${state.username}\n💰 Amount: $${amount.toFixed(2)}\n🏦 Wallet: ${address}`;
-
   try {
     await fetch(`https://api.telegram.org/bot7700000000:REPLACE_WITH_BOT_TOKEN/sendMessage`, {
       method: 'POST',
@@ -1206,11 +1053,11 @@ async function requestWithdraw() {
       body: JSON.stringify({ chat_id: '@sami219', text: msg })
     });
     showToast('✅ Withdrawal request sent!', 'success');
-    document.getElementById('w-amount').value = '';
-    document.getElementById('w-address').value = '';
   } catch(e) {
     showToast('✅ Request submitted! We\'ll process soon.', 'success');
   }
+  document.getElementById('w-amount').value = '';
+  document.getElementById('w-address').value = '';
 }
 
 let toastTimeout;
@@ -1223,4 +1070,4 @@ function showToast(msg, type = '') {
 }
 </script>
 </body>
-                                                    </html>
+ </html>
