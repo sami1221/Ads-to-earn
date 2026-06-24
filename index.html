@@ -8,138 +8,57 @@
 <script src='//libtl.com/sdk.js' data-zone='11186811' data-sdk='show_11186811'></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
   :root {
-    --bg: #0a0f1e;
-    --surface: #111827;
-    --card: #1a2235;
-    --accent: #6c63ff;
-    --accent2: #ff6584;
-    --gold: #ffd700;
-    --green: #00e676;
-    --text: #f0f4ff;
-    --muted: #8892a4;
-    --border: #1e2d45;
-    --gradient: linear-gradient(135deg, #6c63ff, #ff6584);
+    --bg: #0a0f1e; --surface: #111827; --card: #1a2235;
+    --accent: #6c63ff; --accent2: #ff6584; --gold: #ffd700;
+    --green: #00e676; --text: #f0f4ff; --muted: #8892a4;
+    --border: #1e2d45; --gradient: linear-gradient(135deg, #6c63ff, #ff6584);
   }
-
-  html, body {
-    height: 100%; width: 100%;
-    overflow: hidden;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    font-size: 14px;
-  }
-
+  html, body { height: 100%; width: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-size: 14px; }
   #app { height: 100vh; width: 100vw; display: flex; flex-direction: column; overflow: hidden; }
-
   .screen { display: none; flex: 1; overflow: hidden; flex-direction: column; }
   .screen.active { display: flex; }
 
-  /* REGISTER */
-  #register-screen {
-    background: var(--bg); align-items: center;
-    justify-content: center; padding: 24px; text-align: center;
-  }
-  .reg-logo {
-    width: 80px; height: 80px; background: var(--gradient);
-    border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; font-size: 36px; margin: 0 auto 20px;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%,100% { box-shadow: 0 0 30px rgba(108,99,255,0.4); }
-    50% { box-shadow: 0 0 60px rgba(108,99,255,0.8); }
-  }
-  .reg-title {
-    font-size: 26px; font-weight: 800;
-    background: var(--gradient); -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; margin-bottom: 8px;
-  }
+  #register-screen { background: var(--bg); align-items: center; justify-content: center; padding: 24px; text-align: center; }
+  .reg-logo { width: 80px; height: 80px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 20px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 30px rgba(108,99,255,0.4); } 50% { box-shadow: 0 0 60px rgba(108,99,255,0.8); } }
+  .reg-title { font-size: 26px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
   .reg-sub { color: var(--muted); font-size: 13px; margin-bottom: 32px; line-height: 1.5; }
   .input-wrap { width: 100%; position: relative; margin-bottom: 16px; }
   .input-wrap .icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 18px; }
-  .input-wrap input {
-    width: 100%; background: var(--card); border: 1.5px solid var(--border);
-    border-radius: 14px; padding: 14px 14px 14px 42px; color: var(--text);
-    font-size: 15px; outline: none; transition: border-color 0.2s;
-  }
+  .input-wrap input { width: 100%; background: var(--card); border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 14px 14px 42px; color: var(--text); font-size: 15px; outline: none; transition: border-color 0.2s; }
   .input-wrap input:focus { border-color: var(--accent); }
   .input-wrap input::placeholder { color: var(--muted); }
-  .btn-primary {
-    width: 100%; background: var(--gradient); border: none;
-    border-radius: 14px; padding: 15px; color: #fff; font-size: 16px;
-    font-weight: 700; cursor: pointer; letter-spacing: 0.5px;
-  }
+  .btn-primary { width: 100%; background: var(--gradient); border: none; border-radius: 14px; padding: 15px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; }
   .btn-primary:active { transform: scale(0.97); opacity: 0.9; }
 
-  /* NAV */
-  .bottom-nav {
-    display: flex; background: var(--surface); border-top: 1px solid var(--border);
-    padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); flex-shrink: 0;
-  }
-  .nav-btn {
-    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
-    background: none; border: none; color: var(--muted); font-size: 10px;
-    font-weight: 600; cursor: pointer; padding: 6px 0; transition: color 0.2s;
-  }
+  .bottom-nav { display: flex; background: var(--surface); border-top: 1px solid var(--border); padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); flex-shrink: 0; }
+  .nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; color: var(--muted); font-size: 10px; font-weight: 600; cursor: pointer; padding: 6px 0; transition: color 0.2s; }
   .nav-btn .nav-icon { font-size: 20px; transition: transform 0.2s; }
   .nav-btn.active { color: var(--accent); }
   .nav-btn.active .nav-icon { transform: scale(1.15); }
 
-  /* PAGES */
   .page { display: none; flex: 1; overflow-y: auto; overflow-x: hidden; padding: 16px; padding-bottom: 8px; }
   .page.active { display: block; }
 
-  /* HOME */
-  .profile-card {
-    background: var(--gradient); border-radius: 20px; padding: 16px;
-    margin-bottom: 14px; display: flex; align-items: center; gap: 14px;
-    position: relative; overflow: hidden;
-  }
-  .profile-card::after {
-    content: ''; position: absolute; top: -30px; right: -30px;
-    width: 120px; height: 120px; background: rgba(255,255,255,0.08); border-radius: 50%;
-  }
-
-  .avatar {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: rgba(255,255,255,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 26px; flex-shrink: 0;
-    border: 2.5px solid rgba(255,255,255,0.6);
-    overflow: hidden;
-  }
-  .avatar img {
-    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
-  }
-  .avatar-letter {
-    font-size: 24px; font-weight: 800; color: #fff;
-  }
-
+  .profile-card { background: var(--gradient); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 14px; position: relative; overflow: hidden; }
+  .profile-card::after { content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.08); border-radius: 50%; }
+  .avatar { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; border: 2.5px solid rgba(255,255,255,0.6); overflow: hidden; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .avatar-letter { font-size: 24px; font-weight: 800; color: #fff; }
   .profile-info { flex: 1; }
   .profile-name { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 2px; }
   .profile-tag { font-size: 11px; color: rgba(255,255,255,0.75); margin-bottom: 4px; }
-  .ads-earn-label {
-    font-size: 13px; font-weight: 700; color: #fff;
-    background: rgba(255,255,255,0.2); border-radius: 20px;
-    padding: 3px 10px; display: inline-block;
-  }
+  .ads-earn-label { font-size: 13px; font-weight: 700; color: #fff; background: rgba(255,255,255,0.2); border-radius: 20px; padding: 3px 10px; display: inline-block; }
 
-  /* BALANCE */
   .balance-card { background: var(--card); border-radius: 18px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); }
   .balance-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
   .balance-label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
-  .toggle-btn {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 20px; padding: 4px 12px; color: var(--accent); font-size: 11px; font-weight: 700; cursor: pointer;
-  }
+  .toggle-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; color: var(--accent); font-size: 11px; font-weight: 700; cursor: pointer; }
   .balance-amount { font-size: 30px; font-weight: 900; color: var(--gold); letter-spacing: -0.5px; transition: filter 0.3s; }
   .balance-amount.hidden { filter: blur(8px); user-select: none; }
   .balance-usd { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-  /* ADS PROGRESS */
   .ads-progress-card { background: var(--card); border-radius: 18px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); }
   .section-title { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; }
   .progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -147,79 +66,50 @@
   .progress-max { font-size: 12px; color: var(--muted); }
   .progress-bar { height: 8px; background: var(--surface); border-radius: 20px; overflow: hidden; margin-bottom: 10px; }
   .progress-fill { height: 100%; background: var(--gradient); border-radius: 20px; transition: width 0.5s ease; }
-  .watch-btn {
-    width: 100%; background: var(--gradient); border: none; border-radius: 12px;
-    padding: 13px; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
-  }
+  .watch-btn { width: 100%; background: var(--gradient); border: none; border-radius: 12px; padding: 13px; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; }
   .watch-btn:active { transform: scale(0.97); }
   .watch-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .bonus-badge {
-    background: linear-gradient(135deg, #ff6584, #ffd700); border-radius: 12px;
-    padding: 10px 14px; display: flex; align-items: center; gap: 10px;
-    margin-top: 10px; font-size: 13px; font-weight: 700; color: #fff;
-  }
+  .bonus-badge { background: linear-gradient(135deg, #ff6584, #ffd700); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 13px; font-weight: 700; color: #fff; }
 
-  /* TAP FULL SCREEN */
+  /* TAP PAGE */
   #page-tap { padding: 0 !important; display: none; flex-direction: column; overflow: hidden; }
   #page-tap.active { display: flex !important; }
-  .tap-container {
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: space-between; height: 100%; width: 100%; padding: 30px 20px 20px;
-  }
+  .tap-container { display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; width: 100%; padding: 30px 20px 20px; }
   .coin-score { font-size: 28px; font-weight: 900; color: var(--gold); }
-  .coin-icon {
-    width: 220px; height: 220px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #ffd966, #e6a817, #a07000);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; user-select: none;
-    box-shadow: 0 0 0 18px rgba(255,215,0,0.12), 0 12px 48px rgba(255,215,0,0.4);
-    transition: transform 0.08s;
-  }
+  .coin-icon { width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffd966, #e6a817, #a07000); display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; box-shadow: 0 0 0 18px rgba(255,215,0,0.12), 0 12px 48px rgba(255,215,0,0.4); transition: transform 0.08s; }
   .coin-icon:active { transform: scale(0.93); }
   .coin-label { font-size: 52px; font-weight: 900; color: rgba(255,255,255,0.85); pointer-events: none; }
   .tap-bottom { width: 100%; }
-  .buy-ads-card { background: var(--card); border-radius: 18px; padding: 16px; border: 1px solid var(--border); text-align: center; }
-  .buy-ads-title { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
-  .buy-ads-price { font-size: 11px; color: var(--gold); margin-bottom: 10px; }
-  .buy-input-row { display: flex; gap: 8px; align-items: center; }
-  .buy-input-row input {
-    flex: 1; background: var(--surface); border: 1px solid var(--border);
-    border-radius: 10px; padding: 10px; color: var(--text); font-size: 14px; text-align: center; outline: none;
-  }
-  .btn-buy {
-    background: var(--gradient); border: none; border-radius: 10px;
-    padding: 10px 16px; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer;
-  }
+
+  /* Exchange Card */
+  .exchange-card { background: var(--card); border-radius: 18px; padding: 16px; border: 1px solid var(--border); text-align: center; }
+  .exchange-title { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+  .exchange-rate { font-size: 12px; color: var(--gold); margin-bottom: 12px; font-weight: 600; }
+  .exchange-btn { width: 100%; background: var(--gradient); border: none; border-radius: 12px; padding: 13px; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; }
+  .exchange-btn:active { transform: scale(0.97); }
+  .exchange-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .coins-needed { font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+  /* Tap Ad Countdown Overlay */
+  #tap-ad-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 30px; }
+  #tap-ad-overlay.show { display: flex; }
+  .tap-ad-box { background: var(--card); border-radius: 20px; padding: 30px 24px; width: 100%; max-width: 300px; border: 1px solid var(--gold); }
+  .tap-ad-emoji { font-size: 48px; margin-bottom: 8px; }
+  .tap-ad-count { font-size: 52px; font-weight: 900; color: var(--gold); margin: 8px 0; }
+  .tap-ad-text { font-size: 13px; color: var(--muted); }
 
   /* TASK */
   .task-header { text-align: center; margin-bottom: 20px; }
-  .task-title {
-    font-size: 20px; font-weight: 900;
-    background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px;
-  }
+  .task-title { font-size: 20px; font-weight: 900; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
   .task-sub { font-size: 12px; color: var(--muted); }
-  .task-card {
-    background: var(--card); border-radius: 18px; padding: 16px;
-    margin-bottom: 12px; border: 1px solid var(--border);
-    display: flex; align-items: center; gap: 14px; transition: border-color 0.2s;
-  }
+  .task-card { background: var(--card); border-radius: 18px; padding: 16px; margin-bottom: 12px; border: 1px solid var(--border); display: flex; align-items: center; gap: 14px; transition: border-color 0.2s; }
   .task-card.done { border-color: var(--green); }
-
-  .task-icon-wrap {
-    width: 52px; height: 52px; border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; overflow: hidden;
-  }
+  .task-icon-wrap { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
   .task-icon-wrap svg { width: 52px; height: 52px; }
-
   .task-info { flex: 1; }
   .task-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
   .task-reward { font-size: 12px; color: var(--gold); font-weight: 600; }
-  .task-action-btn {
-    background: var(--gradient); border: none; border-radius: 20px;
-    padding: 8px 16px; color: #fff; font-size: 12px; font-weight: 700;
-    cursor: pointer; white-space: nowrap; flex-shrink: 0;
-  }
+  .task-action-btn { background: var(--gradient); border: none; border-radius: 20px; padding: 8px 16px; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
   .task-action-btn.done-btn { background: var(--green); color: #000; cursor: default; }
   .task-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -230,57 +120,27 @@
   .wallet-bal-min { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 4px; }
   .withdraw-card { background: var(--card); border-radius: 18px; padding: 20px; border: 1px solid var(--border); }
   .w-label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
-  .w-input {
-    width: 100%; background: var(--surface); border: 1.5px solid var(--border);
-    border-radius: 12px; padding: 13px; color: var(--text); font-size: 15px;
-    outline: none; margin-bottom: 14px;
-  }
+  .w-input { width: 100%; background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 13px; color: var(--text); font-size: 15px; outline: none; margin-bottom: 14px; }
   .w-input:focus { border-color: var(--accent); }
   .w-input::placeholder { color: var(--muted); }
-  .withdraw-btn {
-    width: 100%; background: var(--gradient); border: none; border-radius: 14px;
-    padding: 15px; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
-  }
+  .withdraw-btn { width: 100%; background: var(--gradient); border: none; border-radius: 14px; padding: 15px; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; }
 
   /* TOAST */
-  .toast {
-    position: fixed; top: 20px; left: 50%;
-    transform: translateX(-50%) translateY(-80px);
-    background: var(--card); border-radius: 14px; padding: 12px 20px;
-    font-size: 13px; font-weight: 600; color: var(--text);
-    border: 1px solid var(--border); z-index: 9999;
-    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-    white-space: nowrap; max-width: 90vw; text-align: center;
-  }
+  .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-80px); background: var(--card); border-radius: 14px; padding: 12px 20px; font-size: 13px; font-weight: 600; color: var(--text); border: 1px solid var(--border); z-index: 9999; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); white-space: nowrap; max-width: 90vw; text-align: center; }
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.success { border-color: var(--green); color: var(--green); }
   .toast.error { border-color: var(--accent2); color: var(--accent2); }
   .toast.gold { border-color: var(--gold); color: var(--gold); }
 
-  /* AD OVERLAY */
-  #ad-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.85); z-index: 1000;
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 20px; text-align: center; padding: 30px;
-  }
+  /* WATCH AD OVERLAY */
+  #ad-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; padding: 30px; }
   #ad-overlay.show { display: flex; }
-  .ad-box {
-    background: var(--card); border-radius: 20px; padding: 24px;
-    width: 100%; max-width: 320px; border: 1px solid var(--border);
-  }
+  .ad-box { background: var(--card); border-radius: 20px; padding: 24px; width: 100%; max-width: 320px; border: 1px solid var(--border); }
   .ad-timer { font-size: 40px; font-weight: 900; color: var(--gold); margin: 16px 0; }
   .ad-earning { font-size: 13px; color: var(--muted); }
 
-  /* FLOAT */
-  .tap-float {
-    position: fixed; font-size: 20px; font-weight: 800; color: var(--gold);
-    pointer-events: none; animation: floatUp 0.8s ease forwards; z-index: 999;
-  }
-  @keyframes floatUp {
-    0% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-80px); }
-  }
+  .tap-float { position: fixed; font-size: 20px; font-weight: 800; color: var(--gold); pointer-events: none; animation: floatUp 0.8s ease forwards; z-index: 999; }
+  @keyframes floatUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-80px); } }
   .scrollable { overflow-y: auto; height: 100%; }
 </style>
 </head>
@@ -315,16 +175,13 @@
             <div class="ads-earn-label">✨ Ads to Earn</div>
           </div>
         </div>
-
         <div class="balance-card">
           <div class="balance-header">
             <div class="balance-label">💰 Balance</div>
             <button class="toggle-btn" id="toggle-bal-btn" onclick="toggleBalance()">Hide</button>
           </div>
           <div class="balance-amount" id="home-balance">$0.00000</div>
-          <div class="balance-usd" id="home-balance-usd">≈ 0 ETB</div>
         </div>
-
         <div class="ads-progress-card">
           <div class="section-title">📺 Daily Ads</div>
           <div class="progress-row">
@@ -347,13 +204,14 @@
             <span class="coin-label">TS</span>
           </div>
           <div class="tap-bottom">
-            <div class="buy-ads-card">
-              <div class="buy-ads-title">🛒 Buy Ads with Coins</div>
-              <div class="buy-ads-price">1 Ad = 50 Coins | You have <span id="buy-coins-display">0</span> coins</div>
-              <div class="buy-input-row">
-                <input type="number" id="buy-ads-input" placeholder="# of ads" min="1">
-                <button class="btn-buy" onclick="buyAds()">Buy</button>
-              </div>
+            <!-- ✅ Exchange Card - 100 coins = $0.0005 -->
+            <div class="exchange-card">
+              <div class="exchange-title">💱 Exchange Coins to Cash</div>
+              <div class="exchange-rate">100 Coins = $0.0005 &nbsp;|&nbsp; You have <span id="buy-coins-display">0</span> coins</div>
+              <button class="exchange-btn" id="exchange-btn" onclick="exchangeCoins()">
+                💰 Exchange 100 Coins → $0.0005
+              </button>
+              <div class="coins-needed" id="coins-needed-text"></div>
             </div>
           </div>
         </div>
@@ -365,8 +223,6 @@
           <div class="task-title">📋 Tasks</div>
           <div class="task-sub">Complete tasks to earn bonus rewards</div>
         </div>
-
-        <!-- TikTok -->
         <div class="task-card" id="task-card-tiktok">
           <div class="task-icon-wrap">
             <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
@@ -383,8 +239,6 @@
           </div>
           <button class="task-action-btn" id="task-btn-tiktok" onclick="startTask('tiktok')">Follow</button>
         </div>
-
-        <!-- YouTube -->
         <div class="task-card" id="task-card-youtube">
           <div class="task-icon-wrap">
             <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
@@ -399,8 +253,6 @@
           </div>
           <button class="task-action-btn" id="task-btn-youtube" onclick="startTask('youtube')">Subscribe</button>
         </div>
-
-        <!-- Telegram -->
         <div class="task-card" id="task-card-telegram">
           <div class="task-icon-wrap">
             <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
@@ -459,7 +311,7 @@
     </div>
   </div>
 
-  <!-- AD OVERLAY -->
+  <!-- WATCH AD OVERLAY -->
   <div id="ad-overlay">
     <div class="ad-box">
       <div style="font-size:13px;color:var(--muted);font-weight:600;">📺 WATCHING AD</div>
@@ -469,31 +321,31 @@
     <div style="font-size:12px;color:var(--muted);">Please wait for the ad to complete</div>
   </div>
 
+  <!-- ✅ TAP AD COUNTDOWN (2 ሰከንድ) -->
+  <div id="tap-ad-overlay">
+    <div class="tap-ad-box">
+      <div class="tap-ad-emoji">🪙</div>
+      <div style="font-size:14px;color:var(--muted);font-weight:600;margin-bottom:4px;">AD LOADING IN</div>
+      <div class="tap-ad-count" id="tap-ad-count">2</div>
+      <div class="tap-ad-text">Keep tapping after the ad!</div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 </div>
 
 <script>
-// ✅ BOT TOKEN እና CHAT ID
 const BOT_TOKEN = '8998521749:AAFwoFANkB60kOGZVf1iUkMxm25n6gbPeKU';
 const ADMIN_CHAT = '@sami219';
 
 let state = {
-  username: '',
-  firstName: '',
-  photoUrl: '',
-  balance: 0,
-  coins: 0,
-  adsToday: 0,
-  balanceVisible: true,
+  username: '', firstName: '', photoUrl: '',
+  balance: 0, coins: 0, adsToday: 0, balanceVisible: true,
   tasks: { tiktok: false, telegram: false, youtube: false },
-  tapCount: 0,
-  tapTarget: Math.floor(Math.random() * 11) + 10
+  tapCount: 0, tapTarget: Math.floor(Math.random() * 11) + 10
 };
 
-function saveState() {
-  localStorage.setItem('ats_state', JSON.stringify(state));
-}
-
+function saveState() { localStorage.setItem('ats_state', JSON.stringify(state)); }
 function loadState() {
   const s = localStorage.getItem('ats_state');
   if (s) { try { state = { ...state, ...JSON.parse(s) }; } catch(e) {} }
@@ -512,11 +364,8 @@ function setAvatar(photoUrl, name) {
 function register() {
   const uname = document.getElementById('reg-username').value.trim().replace('@','');
   if (!uname) { showToast('⚠️ Please enter your username', 'error'); return; }
-  state.username = uname;
-  state.firstName = uname;
-  state.photoUrl = '';
-  saveState();
-  showApp();
+  state.username = uname; state.firstName = uname; state.photoUrl = '';
+  saveState(); showApp();
 }
 
 function showApp() {
@@ -527,50 +376,54 @@ function showApp() {
 
 window.addEventListener('DOMContentLoaded', () => {
   loadState();
-
   if (window.Telegram && Telegram.WebApp) {
-    Telegram.WebApp.ready();
-    Telegram.WebApp.expand();
+    Telegram.WebApp.ready(); Telegram.WebApp.expand();
     const tgUser = Telegram.WebApp.initDataUnsafe?.user;
     if (tgUser) {
       state.username = tgUser.username || String(tgUser.id);
       state.firstName = tgUser.first_name || tgUser.username || 'User';
       state.photoUrl = tgUser.photo_url || '';
-      saveState();
-      showApp();
-      return;
+      saveState(); showApp(); return;
     }
   }
-
   if (state.username) showApp();
 });
 
 function updateUI() {
   document.getElementById('home-name').textContent = state.firstName || state.username;
   document.getElementById('home-tag').textContent = '@' + state.username;
-
   setAvatar(state.photoUrl, state.firstName || state.username);
 
   const bal = state.balance.toFixed(5);
   document.getElementById('home-balance').textContent = '$' + bal;
   document.getElementById('wallet-balance').textContent = '$' + bal;
-  document.getElementById('home-balance-usd').textContent = '≈ ' + (state.balance * 57).toFixed(2) + ' ETB';
+
   document.getElementById('ads-count').textContent = state.adsToday;
   document.getElementById('ads-progress-fill').style.width = (state.adsToday / 60 * 100) + '%';
 
   const watchBtn = document.getElementById('watch-btn');
   if (state.adsToday >= 60) {
-    watchBtn.disabled = true;
-    watchBtn.textContent = '✅ Daily limit reached!';
+    watchBtn.disabled = true; watchBtn.textContent = '✅ Daily limit reached!';
     document.getElementById('bonus-container').innerHTML = `<div class="bonus-badge">🎉 +$0.001 Bonus! Watch again tomorrow.</div>`;
   } else {
-    watchBtn.disabled = false;
-    watchBtn.textContent = '▶ Watch Ad & Earn';
+    watchBtn.disabled = false; watchBtn.textContent = '▶ Watch Ad & Earn';
     document.getElementById('bonus-container').innerHTML = '';
   }
 
   document.getElementById('tap-coins').textContent = state.coins;
   document.getElementById('buy-coins-display').textContent = state.coins;
+
+  // ✅ Exchange button
+  const exchBtn = document.getElementById('exchange-btn');
+  const neededText = document.getElementById('coins-needed-text');
+  if (state.coins >= 100) {
+    exchBtn.disabled = false;
+    const times = Math.floor(state.coins / 100);
+    neededText.textContent = `Can exchange ${times}x → $${(times * 0.0005).toFixed(4)} total`;
+  } else {
+    exchBtn.disabled = true;
+    neededText.textContent = `Need ${100 - state.coins} more coins`;
+  }
 
   ['tiktok','telegram','youtube'].forEach(t => {
     const btn = document.getElementById('task-btn-' + t);
@@ -605,26 +458,17 @@ function switchPage(name, btn) {
   btn.classList.add('active');
 }
 
-// ✅ watchAd - SDK check + real ad
 function watchAd() {
-  if (state.adsToday >= 60) { showToast('✅ You reached today\'s limit!', 'error'); return; }
-
+  if (state.adsToday >= 60) { showToast("✅ You reached today's limit!", 'error'); return; }
   const earning = (Math.random() * (0.0001 - 0.00005) + 0.00005).toFixed(5);
-
-  // ✅ SDK check - ትክክለኛ zone ID
-  if (typeof show_11186811 === 'function') {
-    show_11186811();
-  } else {
-    showToast('⚠️ Ad loading...', '');
-  }
+  if (typeof show_11186811 === 'function') show_11186811();
+  else showToast('⚠️ Ad loading...', '');
 
   const overlay = document.getElementById('ad-overlay');
   overlay.classList.add('show');
   document.getElementById('ad-earn-text').textContent = 'Earning $' + earning + '...';
-
   let secs = 5;
   document.getElementById('ad-timer').textContent = secs;
-
   const interval = setInterval(() => {
     secs--;
     document.getElementById('ad-timer').textContent = secs;
@@ -644,9 +488,14 @@ function watchAd() {
   }, 1000);
 }
 
+// ✅ tapCoin - 2 ሰከንድ countdown ካለቀ ad ይመጣ
+let tapAdShowing = false;
+
 function tapCoin(e) {
+  if (tapAdShowing) return;
   state.tapCount++; state.coins++;
   saveState();
+
   const float = document.createElement('div');
   float.className = 'tap-float';
   float.textContent = '+1';
@@ -654,26 +503,45 @@ function tapCoin(e) {
   float.style.top = (e.clientY - 20) + 'px';
   document.body.appendChild(float);
   setTimeout(() => float.remove(), 800);
+
   updateUI();
+
   if (state.tapCount >= state.tapTarget) {
     state.tapCount = 0;
     state.tapTarget = Math.floor(Math.random() * 11) + 10;
     saveState();
-    if (typeof show_11186811 === 'function') show_11186811();
-    showToast('🪙 Keep tapping for more coins!', 'gold');
+
+    // ✅ 2 ሰከንድ countdown ካለቀ ad ይከፈት
+    tapAdShowing = true;
+    const tapOverlay = document.getElementById('tap-ad-overlay');
+    tapOverlay.classList.add('show');
+    let countdown = 2;
+    document.getElementById('tap-ad-count').textContent = countdown;
+
+    const countInterval = setInterval(() => {
+      countdown--;
+      document.getElementById('tap-ad-count').textContent = countdown;
+      if (countdown <= 0) {
+        clearInterval(countInterval);
+        tapOverlay.classList.remove('show');
+        tapAdShowing = false;
+        if (typeof show_11186811 === 'function') show_11186811();
+        showToast('🪙 Keep tapping for more coins!', 'gold');
+      }
+    }, 1000);
   }
 }
 
-function buyAds() {
-  const input = document.getElementById('buy-ads-input');
-  const amount = parseInt(input.value);
-  if (!amount || amount < 1) { showToast('⚠️ Enter a valid number', 'error'); return; }
-  const cost = amount * 50;
-  if (cost > state.coins) { showToast('❌ Not enough coins! Need ' + cost, 'error'); return; }
-  state.coins -= cost;
-  state.adsToday = Math.max(0, state.adsToday - amount);
-  saveState(); updateUI(); input.value = '';
-  showToast('✅ Bought ' + amount + ' ads!', 'success');
+// ✅ Exchange 100 coins → $0.0005
+function exchangeCoins() {
+  if (state.coins < 100) { showToast('❌ Need at least 100 coins!', 'error'); return; }
+  const times = Math.floor(state.coins / 100);
+  const coinsUsed = times * 100;
+  const earned = times * 0.0005;
+  state.coins -= coinsUsed;
+  state.balance += earned;
+  saveState(); updateUI();
+  showToast(`✅ ${coinsUsed} coins → +$${earned.toFixed(4)}!`, 'gold');
 }
 
 const taskLinks = {
@@ -711,7 +579,6 @@ function completeTask(type) {
   showToast('🎉 Task done! +$0.01 earned!', 'gold');
 }
 
-// ✅ Withdraw - ትክክለኛ BOT TOKEN
 async function requestWithdraw() {
   const amount = parseFloat(document.getElementById('w-amount').value);
   const address = document.getElementById('w-address').value.trim();
@@ -720,7 +587,6 @@ async function requestWithdraw() {
   if (amount > state.balance) { showToast('❌ Insufficient balance', 'error'); return; }
 
   const msg = `💸 Withdraw Request\n👤 User: @${state.username}\n💰 Amount: $${amount.toFixed(2)}\n🏦 Wallet: ${address}`;
-
   try {
     const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
